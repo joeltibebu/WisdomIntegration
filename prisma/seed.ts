@@ -1,7 +1,7 @@
-import { PrismaClient, Role } from '@prisma/client'
+import { PrismaClient, Role } from './generated/client/client'
 import bcrypt from 'bcryptjs'
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient({ accelerateUrl: process.env.DATABASE_URL! })
 
 const SALT_ROUNDS = 10
 
