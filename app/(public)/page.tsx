@@ -76,7 +76,7 @@ const sections = [
 
 export default function HomePage() {
   return (
-    <div className="bg-wisdom-bg">
+    <div className="bg-transparent w-full">
 
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <HomePageHero />
@@ -89,7 +89,7 @@ export default function HomePage() {
               <Link
                 key={i}
                 href={s.href}
-                className="group relative bg-white dark:bg-wisdom-surface rounded-[2rem] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
+                className="group relative bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl rounded-[2rem] border border-white/20 dark:border-white/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col"
               >
                 {/* Color top accent bar */}
                 <div className={`h-1.5 w-full bg-gradient-to-r ${s.color}`} />
@@ -134,42 +134,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BOOK HIGHLIGHT ───────────────────────────────────────── */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-wisdom-blue/[0.03] border-y border-slate-200 dark:border-white/5">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="relative flex justify-center lg:justify-start">
-            <div className="absolute inset-0 bg-wisdom-blue/10 rounded-full blur-[80px] opacity-40" />
-            <Image
-              src="/images/book-cover.png"
-              alt="From Our Journey to Yours"
-              width={320}
-              height={440}
-              className="relative z-10 rounded-xl shadow-[0_20px_50px_rgba(30,75,155,0.25)] rotate-1 hover:rotate-0 transition-transform duration-500 max-w-[280px] w-full"
-            />
-          </div>
-          <div className="space-y-5">
-            <span className="inline-block py-1 px-4 rounded-full bg-white dark:bg-wisdom-surface border border-slate-200 dark:border-white/10 text-wisdom-orange font-bold text-xs tracking-[0.2em] uppercase shadow-sm">
-              Featured Book / ልዩ መጽሐፍ
+      {/* ── FEATURED BOOKS SECTION ──────────────────────────────── */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16 space-y-4">
+            <span className="inline-block py-1 px-4 rounded-full bg-wisdom-blue/10 dark:bg-wisdom-surface/50 border border-wisdom-blue/20 dark:border-white/10 text-wisdom-blue dark:text-wisdom-yellow font-bold text-xs tracking-[0.2em] uppercase shadow-sm">
+              Our Publications / የእኛ መጻሕፍት
             </span>
-            <h3 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text leading-tight">
-              From Our Journey <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-wisdom-blue to-wisdom-green">to Yours.</span>
-            </h3>
-            <p className="text-wisdom-muted text-lg leading-relaxed font-medium">
-              A deeply personal account of faith, resilience, and the wisdom gained through raising a child with special needs — offering hope to every family walking the same road.
+            <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-wisdom-text dark:text-white leading-tight">
+              Wisdom <span className="text-transparent bg-clip-text bg-gradient-to-r from-wisdom-blue to-wisdom-green dark:from-wisdom-blue dark:to-wisdom-green">Bookshelf</span>
+            </h2>
+            <p className="text-wisdom-muted dark:text-slate-400 text-lg max-w-2xl mx-auto font-medium">
+              Deeply personal accounts of faith, resilience, and the wisdom gained through raising children with special needs.
             </p>
-            <div className="flex gap-4 pt-2">
-              <Link href="/contact?subject=Book%20Order">
-                <Button className="px-8 py-5 rounded-[2rem] bg-wisdom-blue text-white font-bold shadow-lg hover:-translate-y-1 transition-all">
-                  Order Now
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button variant="outline" className="px-8 py-5 rounded-[2rem] border-wisdom-blue text-wisdom-blue font-bold hover:bg-wisdom-blue/5 hover:-translate-y-1 transition-all">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { title: "From Our Journey to Yours", am: "ከእኛ ጉዞ ወደ እርስዎ", img: "/images/book-cover.png", author: "Daniel Takele" },
+              { title: "Walking with Grace", am: "በጸጋ መመላለስ", img: "/images/book1.jpeg", author: "Daniel Takele" },
+              { title: "Family Faith Anchors", am: "የቤተሰብ እምነት መልሕቆች", img: "/images/book2.jpeg", author: "Yenenesh" }
+            ].map((book, idx) => (
+              <div key={idx} className="group relative bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/5 p-8 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div className="relative w-48 h-64 mb-8 shadow-2xl transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2">
+                  <Image
+                    src={book.img}
+                    alt={book.title}
+                    fill
+                    className="object-cover rounded-xl"
+                  />
+                </div>
+                <h3 className="font-heading font-bold text-xl text-wisdom-text dark:text-white mb-2 leading-tight">
+                  {book.title}
+                </h3>
+                <p className="font-amharic text-wisdom-muted dark:text-slate-400 text-sm mb-4 opacity-80">
+                  {book.am}
+                </p>
+                <p className="text-xs font-bold text-wisdom-blue dark:text-wisdom-yellow uppercase tracking-widest mb-6">
+                  By {book.author}
+                </p>
+                
+                <div className="mt-auto flex gap-3 w-full">
+                  <Link href="/contact?subject=Book%20Order" className="flex-1">
+                    <Button className="w-full rounded-2xl py-5 bg-wisdom-blue hover:bg-wisdom-blue/90 text-white font-bold text-sm shadow-lg">
+                      Order Now
+                    </Button>
+                  </Link>
+                  <Link href="/about" className="flex-1">
+                    <Button variant="outline" className="w-full rounded-2xl py-5 border-wisdom-blue/30 text-wisdom-blue dark:text-white hover:bg-wisdom-blue/5 font-bold text-sm">
+                      Details
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

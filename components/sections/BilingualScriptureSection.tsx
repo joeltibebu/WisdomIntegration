@@ -56,7 +56,7 @@ export function BilingualScriptureSection() {
               {/* Card Inner Glow */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-wisdom-yellow rounded-full mix-blend-multiply dark:mix-blend-screen opacity-0 group-hover:opacity-20 dark:group-hover:opacity-10 filter blur-[60px] transition-opacity duration-700 pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
               
-              <blockquote className="font-body text-[1.25rem] sm:text-[1.35rem] text-wisdom-text leading-[1.8] italic relative z-10 font-medium">
+              <blockquote className="font-heading text-xl sm:text-2xl text-wisdom-text leading-[1.8] italic relative z-10 font-bold opacity-90">
                 &ldquo;The Spirit of the Lord God is upon me,<br />
                 because the Lord has anointed me<br />
                 to bring good news to the poor;<br />
@@ -90,11 +90,11 @@ export function BilingualScriptureSection() {
             </p>
 
             {/* Glassmorphism Scripture Card */}
-            <div className="h-full bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-[32px] p-8 sm:p-10 shadow-xl hover:bg-white/80 dark:hover:bg-white/[0.07] transition-colors duration-500 relative group overflow-hidden">
+            <div className="h-full bg-white/20 dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200/50 dark:border-white/5 rounded-[32px] p-8 sm:p-10 shadow-lg hover:bg-white/40 dark:hover:bg-white/[0.04] transition-colors duration-500 relative group overflow-hidden">
               {/* Card Inner Glow */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-wisdom-green rounded-full mix-blend-multiply dark:mix-blend-screen opacity-0 group-hover:opacity-20 dark:group-hover:opacity-10 filter blur-[60px] transition-opacity duration-700 pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
               
-              <blockquote className="font-body text-[1.25rem] sm:text-[1.35rem] text-wisdom-text leading-[1.8] italic font-amharic relative z-10 font-medium z-10">
+              <blockquote className="font-heading text-xl sm:text-2xl text-wisdom-text leading-[2] italic font-amharic relative z-10 font-bold opacity-90">
                 &ldquo;የጌታ የእግዚአብሔር መንፈስ በእኔ ላይ ነው፤<br />
                 ለድሆች የምሥራችን እሰብክ ዘንድ እግዚአብሔር ቀብቶኛል፤<br />
                 ልባቸው <span className="text-wisdom-orange dark:text-yellow-400 font-bold px-1 not-italic border-b border-wisdom-orange/30 dark:border-yellow-400/30">የተሰበረውን</span> እጠግን ዘንድ፣<br />

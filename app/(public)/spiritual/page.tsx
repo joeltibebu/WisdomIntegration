@@ -1,12 +1,12 @@
 import React from "react";
 import { Metadata } from "next";
+import { SubPageHero } from "@/components/sections/SubPageHero";
+import { CTASection } from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
   title: "Spiritual Wisdom | Faith & Encouragement",
   description: "Bible-based devotionals and messages of faith to anchor your heart in the love of Christ. Find strength and peace for your journey.",
 };
-import { SubPageHero } from "@/components/sections/SubPageHero";
-import { CTASection } from "@/components/sections/CTASection";
 
 interface DevotionalProps {
   titleEn: string;

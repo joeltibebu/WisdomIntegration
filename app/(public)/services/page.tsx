@@ -40,7 +40,7 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-wisdom-bg">
+    <div className="min-h-screen bg-transparent">
       <SubPageHero 
         badgeEn="Our Services" 
         badgeAm="የእኛ አገልግሎቶች" 
@@ -74,7 +74,7 @@ export default function ServicesPage() {
               </div>
 
               <div className={`${idx % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
-                <div className="bg-white dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-[2.5rem] p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div className="bg-white/60 dark:bg-wisdom-surface/40 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-[2.5rem] p-8 sm:p-12 shadow-xl hover:shadow-2xl transition-all duration-500">
                    <h4 className="font-heading font-bold text-xl text-wisdom-text mb-8">What We Provide:</h4>
                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {service.pointsEn.map((point, pIdx) => (

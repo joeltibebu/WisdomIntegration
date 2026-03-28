@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Inter, Noto_Sans_Ethiopic } from "next/font/google";
+import Image from "next/image";
 import "./globals.css";
 
 // Poppins — used for headings (font-heading in Tailwind config)
@@ -44,8 +45,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable} ${notoSansEthiopic.variable}`}>
-      <body className="antialiased font-body bg-wisdom-bg text-wisdom-text">
-        {children}
+      <body className="antialiased font-body text-wisdom-text relative min-h-screen bg-transparent">
+        
+        {/* Global Fixed Background Image */}
+        <div className="fixed inset-0 z-[-50] overflow-hidden pointer-events-none bg-slate-100 dark:bg-slate-950">
+          <Image
+            src="/images/bg.jpeg"
+            alt="Site Background"
+            fill
+            className="object-cover opacity-[0.4] dark:opacity-[0.25]"
+            priority
+          />
+          {/* Subtle gradient overlay to pull the image and content together */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/20 dark:from-black/20 dark:to-black/20"></div>
+        </div>
+
+        {/* Next.js View Router Output */}
+        <div className="relative z-0">
+          {children}
+        </div>
+        
       </body>
     </html>
   );

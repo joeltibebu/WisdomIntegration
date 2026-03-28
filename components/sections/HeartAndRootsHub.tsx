@@ -2,8 +2,12 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function HeartAndRootsHub() {
+  const { lang } = useLanguage();
+  const am = lang === "am";
+
   const [activeTab, setActiveTab] = useState<"story" | "purpose" | "scripture">("story");
 
   const tabs = [
@@ -21,11 +25,20 @@ export function HeartAndRootsHub() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-8">
           <span className="inline-block py-1 px-4 rounded-full bg-white dark:bg-wisdom-surface border border-slate-200 dark:border-white/10 text-wisdom-blue font-bold text-xs tracking-[0.2em] uppercase mb-4 shadow-sm">
-            Our Heart & Roots / የእኛ ልብ እና መሠረት
+            {am ? "የእኛ ልብ እና መሠረት" : "Our Heart & Roots"}
           </span>
           <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-wisdom-text tracking-tight leading-tight">
-            Consistently Healing & <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-wisdom-blue via-wisdom-green to-wisdom-yellow">Building with Wisdom.</span>
+            {am ? (
+              <>
+                በጥበብ <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-wisdom-blue via-wisdom-green to-wisdom-yellow">መፈወስ እና መገንባት.</span>
+              </>
+            ) : (
+              <>
+                Consistently Healing & <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-wisdom-blue via-wisdom-green to-wisdom-yellow">Building with Wisdom.</span>
+              </>
+            )}
           </h2>
         </div>
 
@@ -45,8 +58,7 @@ export function HeartAndRootsHub() {
                 <div className="absolute inset-0 bg-gradient-to-r from-wisdom-blue to-wisdom-green animate-in fade-in duration-500"></div>
               )}
               <div className="relative z-10 flex flex-col items-center">
-                <span>{tab.labelEn}</span>
-                <span className="text-[10px] font-amharic opacity-80">{tab.labelAm}</span>
+                <span className={am ? "font-amharic" : ""}>{am ? tab.labelAm : tab.labelEn}</span>
               </div>
             </button>
           ))}
@@ -59,17 +71,22 @@ export function HeartAndRootsHub() {
           {activeTab === "story" && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start animate-in fade-in slide-in-from-bottom-6 duration-700">
               <div className="space-y-6 pt-2">
-                <h3 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text">Born from Love & Experience</h3>
+                <h3 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text">{am ? "ከፍቅር እና ከልምድ የተወለደ" : "Born from Love & Experience"}</h3>
                 <div className="relative pl-6 border-l-4 border-wisdom-blue/30 space-y-4">
-                  <p className="font-body text-wisdom-text text-lg leading-relaxed font-medium">
-                    Wisdom Integration Ministry was born from the 20-year journey of Brother Daniel and Sister Yenenesh, raising their son Kaleb with autism.
-                  </p>
-                  <p className="font-body text-wisdom-muted text-base font-amharic opacity-90 italic leading-relaxed">
-                    ዊዝደም ኢንቲግሬሽን ሚኒስትሪ የተመሠረተው ልጃቸው ካሌብን ከኦቲዝም ጋር በማሳደግ በዳንኤል እና የኔነሽ የ20 ዓመታት ጉዞ ውስጥ በተገኘው ልምድ ነው፡፡
-                  </p>
+                  {am ? (
+                    <p className="font-amharic text-wisdom-text text-lg leading-relaxed font-medium">
+                      ዊዝደም ኢንቲግሬሽን ሚኒስትሪ የተመሠረተው ልጃቸው ካሌብን ከኦቲዝም ጋር በማሳደግ በዳንኤል እና የኔነሽ የ20 ዓመታት ጉዞ ውስጥ በተገኘው ልምድ ነው፡፡
+                    </p>
+                  ) : (
+                    <p className="font-body text-wisdom-text text-lg leading-relaxed font-medium">
+                      Wisdom Integration Ministry was born from the 20-year journey of Brother Daniel and Sister Yenenesh, raising their son Kaleb with autism.
+                    </p>
+                  )}
                 </div>
-                <p className="font-body text-wisdom-muted text-base leading-relaxed font-medium">
-                  What began as a personal struggle has transformed into a profound mission: to find healing, purpose, and community for children and families walking the same path.
+                <p className={`text-wisdom-muted text-base leading-relaxed font-medium ${am ? 'font-amharic' : 'font-body'}`}>
+                  {am 
+                    ? "እንደ ግል ትግል የጀመረው ነገር ወደ ጥልቅ ተልዕኮ ተቀይሯል፡ በተመሳሳይ መንገድ ለሚጓዙ ልጆች እና ቤተሰቦች ፈውሰ፣ ዓላማ እና ማኅበረሰብን ማግኘት።" 
+                    : "What began as a personal struggle has transformed into a profound mission: to find healing, purpose, and community for children and families walking the same path."}
                 </p>
               </div>
               <div className="relative group self-start">
@@ -85,8 +102,10 @@ export function HeartAndRootsHub() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                   <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-white/10 rounded-xl border border-white/20">
-                     <p className="text-white text-[10px] font-black tracking-[0.2em] uppercase mb-0.5">Who We Are</p>
-                     <p className="text-white/70 text-[10px] font-amharic">የካሌብ ጉዞ — የእኛ መነሻ</p>
+                     <p className={`text-white text-[10px] font-black uppercase mb-0.5 tracking-wider ${am ? 'font-amharic' : 'tracking-[0.2em]'}`}>
+                       {am ? "የካሌብ ጉዞ — የእኛ መነሻ" : "Who We Are"}
+                     </p>
+                     {!am && <p className="text-white/70 text-[10px] font-amharic">የካሌብ ጉዞ — የእኛ መነሻ</p>}
                   </div>
                 </div>
               </div>
@@ -97,9 +116,11 @@ export function HeartAndRootsHub() {
           {activeTab === "purpose" && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start animate-in fade-in slide-in-from-bottom-6 duration-700">
               <div className="space-y-6 pt-2">
-                <h3 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text">Faith, Wisdom, and True Love</h3>
-                <p className="font-body text-wisdom-muted text-lg leading-relaxed font-medium italic border-l-4 border-wisdom-green/30 pl-6 py-2">
-                  &quot;For I have come to bring good news to the poor and bind up the brokenhearted.&quot;
+                <h3 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text">
+                  {am ? "እምነት፣ ጥበብ እና እውነተኛ ፍቅር" : "Faith, Wisdom, and True Love"}
+                </h3>
+                <p className={`text-wisdom-muted text-lg leading-relaxed font-medium italic border-l-4 border-wisdom-green/30 pl-6 py-2 ${am ? 'font-amharic' : 'font-body'}`}>
+                  {am ? '"ለድሆች የምሥራችን እሰብክ ዘንድ፣ ልባቸው የተሰበረውን እጠግን ዘንድ..."' : '"For I have come to bring good news to the poor and bind up the brokenhearted."'}
                 </p>
                 <div className="grid grid-cols-1 gap-3">
                    {[
@@ -110,9 +131,7 @@ export function HeartAndRootsHub() {
                      <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-wisdom-surface border border-slate-100 dark:border-white/10 shadow-sm">
                        <div className={`w-2.5 h-2.5 rounded-full ${item.color}`}></div>
                        <div className="flex flex-wrap items-center gap-2">
-                         <span className="font-bold text-sm text-wisdom-text">{item.en}</span>
-                         <span className="text-slate-300 text-xs">/</span>
-                         <span className="font-amharic font-bold text-sm text-wisdom-text pt-0.5">{item.am}</span>
+                         <span className={`font-bold text-sm text-wisdom-text ${am ? 'font-amharic' : ''}`}>{am ? item.am : item.en}</span>
                        </div>
                      </div>
                    ))}
@@ -139,15 +158,12 @@ export function HeartAndRootsHub() {
                </div>
                <div className="space-y-12">
                   <div className="space-y-4">
-                     <h4 className="font-heading text-2xl font-bold text-wisdom-blue">Isaiah 61:1 / ኢሳይያስ 61፥1</h4>
-                     <p className="font-body text-xl text-wisdom-text leading-relaxed italic max-w-3xl mx-auto">
-                        &ldquo;The Spirit of the Lord God is upon me, because the Lord has anointed me to bring good news to the poor; He has sent me to bind up the <span className="text-wisdom-orange font-bold">brokenhearted</span>...&rdquo;
-                     </p>
-                  </div>
-                  <div className="h-px w-40 bg-gradient-to-r from-transparent via-slate-200 dark:via-white/10 to-transparent mx-auto"></div>
-                  <div className="space-y-4">
-                     <p className="font-amharic text-2xl text-wisdom-text leading-relaxed italic max-w-3xl mx-auto">
-                        &ldquo;የጌታ የእግዚአብሔር መንፈስ በእኔ ላይ ነው፤ ለድሆች የምሥራችን እሰብክ ዘንድ እግዚአብሔር ቀብቶኛል፤ ልባቸው <span className="text-wisdom-orange font-bold">የተሰበረውን</span> እጠግን ዘንድ... ላከኝ።&rdquo;
+                     <h4 className="font-heading text-2xl font-bold text-wisdom-blue">{am ? "ኢሳይያስ 61፥1" : "Isaiah 61:1"}</h4>
+                     <p className={`text-xl text-wisdom-text leading-relaxed italic max-w-3xl mx-auto ${am ? 'font-amharic' : 'font-body'}`}>
+                        {am 
+                          ? <>“የጌታ የእግዚአብሔር መንፈስ በእኔ ላይ ነው፤ ለድሆች የምሥራችን እሰብክ ዘንድ እግዚአብሔር ቀብቶኛል፤ ልባቸው <span className="text-wisdom-orange font-bold">የተሰበረውን</span> እጠግን ዘንድ... ላከኝ።”</>
+                          : <>&ldquo;The Spirit of the Lord God is upon me, because the Lord has anointed me to bring good news to the poor; He has sent me to bind up the <span className="text-wisdom-orange font-bold">brokenhearted</span>...&rdquo;</>
+                        }
                      </p>
                   </div>
                </div>
