@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  PARENT
+  THERAPIST
+  ADMIN
+}
+
+enum SessionStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  children  ChildProfile[] @relation("ParentChildren")
+  sessions  Session[]      @relation("TherapistSessions")
+  notes     SessionNote[]
+  messages  Message[]
+  caseload  ChildProfile[] @relation("TherapistCaseload")
+}
+
+model ChildProfile {
+  id               String    @id @default(cuid())
+  name             String
+  dateOfBirth      DateTime
+  diagnosisNotes   String?
+  emergencyContact String
+  medicalNotes     String?
+  parentId         String
+  therapistId      String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  parent    User            @relation("ParentChildren", fields: [parentId], references: [id])
+  therapist User?           @relation("TherapistCaseload", fields: [therapistId], references: [id])
+  sessions  Session[]
+  notes     SessionNote[]
+  goals     Goal[]
+  reports   ProgressReport[]
+}
+
+model Session {
+  id          String        @id @default(cuid())
+  childId     String
+  therapistId String
+  serviceType String
+  scheduledAt DateTime
+  status      SessionStatus @default(SCHEDULED)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  child     ChildProfile @relation(fields: [childId], references: [id])
+  therapist User         @relation("TherapistSessions", fields: [therapistId], references: [id])
+  note      SessionNote?
+}
+
+model SessionNote {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  childId   String
+  authorId  String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  session Session      @relation(fields: [sessionId], references: [id])
+  child   ChildProfile @relation(fields: [childId], references: [id])
+  author  User         @relation(fields: [authorId], references: [id])
+}
+
+model ProgressReport {
+  id         String   @id @default(cuid())
+  childId    String
+  fileUrl    String
+  uploadedBy String
+  createdAt  DateTime @default(now())
+
+  child ChildProfile @relation(fields: [childId], references: [id])
+}
+
+model Goal {
+  id          String    @id @default(cuid())
+  childId     String
+  description String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  child ChildProfile @relation(fields: [childId], references: [id])
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  senderId  String
+  content   String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  sender User @relation(fields: [senderId], references: [id])
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContentPost {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  body        String
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
