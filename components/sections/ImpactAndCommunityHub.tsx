@@ -12,7 +12,7 @@ export function ImpactAndCommunityHub() {
 
   const [activeTab, setActiveTab] = useState<"vision" | "outcome" | "events">("vision");
 
-  const tabs = [
+  const tabs: { id: "vision" | "outcome" | "events"; labelEn: string; labelAm: string }[] = [
     { id: "vision", labelEn: "Why It Matters", labelAm: "ለምን አስፈለገ?" },
     { id: "outcome", labelEn: "Expected Results", labelAm: "የሚገኝ ውጤት" },
     { id: "events", labelEn: "Upcoming Events", labelAm: "መጪ ኩነቶች" },
@@ -48,7 +48,7 @@ export function ImpactAndCommunityHub() {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`relative px-6 py-3 rounded-2xl font-heading font-bold text-sm sm:text-base transition-all duration-500 overflow-hidden ${
                 activeTab === tab.id 
                   ? "text-white shadow-xl shadow-wisdom-orange/20" 

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { childId, serviceId, scheduledAt, notes } = result.data;
+  const { childId, serviceId, scheduledAt } = result.data;
 
   try {
     // Verify child belongs to this parent

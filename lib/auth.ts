@@ -8,6 +8,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -28,11 +29,17 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) { token.id = user.id; token.role = (user as any).role }
+      if (user) { 
+        token.id = user.id; 
+        token.role = (user as unknown as { role: "PARENT" | "THERAPIST" | "ADMIN" }).role 
+      }
       return token
     },
     async session({ session, token }) {
-      if (token) { session.user.id = token.id as string; session.user.role = token.role as any }
+      if (token && session.user) { 
+        session.user.id = token.id as string; 
+        session.user.role = token.role as "PARENT" | "THERAPIST" | "ADMIN"
+      }
       return session
     },
   },

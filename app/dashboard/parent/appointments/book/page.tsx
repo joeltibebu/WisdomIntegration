@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
@@ -27,8 +28,9 @@ export default async function BookAppointmentPage() {
             Select a child, service, and time to schedule a therapy session.
           </p>
         </div>
-        <BookingForm services={services} children={children} />
+        <BookingForm services={services} profiles={children} />
       </div>
     </DashboardShell>
   );
 }
+

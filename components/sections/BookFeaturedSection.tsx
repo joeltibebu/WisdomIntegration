@@ -89,7 +89,7 @@ export function BookFeaturedSection() {
           {/* Right: Content */}
           <div className="lg:col-span-7 text-center lg:text-left">
             <span className="inline-block py-1.5 px-5 rounded-full bg-wisdom-blue/10 text-wisdom-blue font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-6 shadow-sm">
-              The Visionary's Story / ባለራዕዩ ታሪክ
+              The Visionary&apos;s Story / ባለራዕዩ ታሪክ
             </span>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-wisdom-text mb-8 tracking-tight leading-tight">
               From Our Journey <br />

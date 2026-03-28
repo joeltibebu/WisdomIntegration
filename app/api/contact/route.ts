@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ContactPayload {
@@ -68,3 +69,4 @@ export async function POST(req: NextRequest) {
     { status: 200 }
   );
 }
+

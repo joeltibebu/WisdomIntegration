@@ -69,17 +69,17 @@ export default function ParentsPage() {
             <div className="space-y-8">
                <div className="space-y-4">
                   <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text leading-tight">
-                    From a Mother's Heart to Yours
+                    From a Mother&apos;s Heart to Yours
                   </h2>
                   <p className="font-amharic text-lg font-bold text-wisdom-blue">ከእናት ልብ ወደ እርስዎ</p>
                </div>
                
                <div className="space-y-6 text-wisdom-muted text-lg leading-relaxed font-medium">
                   <p>
-                    "I remember the early days—the questions, the isolation, and the weight of the unknown. But I also remember the moment I realized that my child was not a burden, but a divine masterpiece."
+                    &quot;I remember the early days—the questions, the isolation, and the weight of the unknown. But I also remember the moment I realized that my child was not a burden, but a divine masterpiece.&quot;
                   </p>
                   <p className="font-amharic opacity-90 border-l-4 border-wisdom-yellow/30 pl-6 py-2">
-                    "ያለፈውን ጊዜ አስታውሳለሁ — ጥያቄዎቹን፣ ብቸኝነቱን እና ያልታወቁ ነገሮች ጫናን፡፡ ነገር ግን ልጄ ሸክም ሳይሆን መለኮታዊ ሥራ መሆኑን የተረዳሁበትንም ቅጽበት አስታውሳለሁ፡፡"
+                    &quot;ያለፈውን ጊዜ አስታውሳለሁ — ጥያቄዎቹን፣ ብቸኝነቱን እና ያልታወቁ ነገሮች ጫናን፡፡ ነገር ግን ልጄ ሸክም ሳይሆን መለኮታዊ ሥራ መሆኑን የተረዳሁበትንም ቅጽበት አስታውሳለሁ፡፡&quot;
                   </p>
                   <p>
                     Wisdom Integration is here to tell you that your story matters, your struggles are seen, and there is hope in every small step forward.

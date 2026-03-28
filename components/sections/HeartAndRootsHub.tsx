@@ -10,7 +10,7 @@ export function HeartAndRootsHub() {
 
   const [activeTab, setActiveTab] = useState<"story" | "purpose" | "scripture">("story");
 
-  const tabs = [
+  const tabs: { id: "story" | "purpose" | "scripture"; labelEn: string; labelAm: string }[] = [
     { id: "story", labelEn: "Our Story", labelAm: "ታሪካችን" },
     { id: "purpose", labelEn: "Our Purpose", labelAm: "ዓላማችን" },
     { id: "scripture", labelEn: "Our Foundation", labelAm: "መሠረታችን" },
@@ -47,7 +47,7 @@ export function HeartAndRootsHub() {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`relative px-6 py-3 rounded-2xl font-heading font-bold text-sm sm:text-base transition-all duration-500 overflow-hidden ${
                 activeTab === tab.id 
                   ? "text-white shadow-xl shadow-wisdom-blue/20" 

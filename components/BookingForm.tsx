@@ -18,7 +18,7 @@ interface Child {
 
 interface BookingFormProps {
   services: Service[];
-  children: Child[];
+  profiles: Child[];
 }
 
 const TIME_SLOTS = [
@@ -31,7 +31,7 @@ const TIME_SLOTS = [
   { value: "16:00", label: "4:00 PM" },
 ];
 
-export function BookingForm({ services, children }: BookingFormProps) {
+export function BookingForm({ services, profiles }: BookingFormProps) {
   const router = useRouter();
   const [childId, setChildId] = useState("");
   const [serviceId, setServiceId] = useState("");
@@ -42,7 +42,6 @@ export function BookingForm({ services, children }: BookingFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  const today = new Date().toISOString().split("T")[0];
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -93,7 +92,7 @@ export function BookingForm({ services, children }: BookingFormProps) {
     }
   }
 
-  if (children.length === 0) {
+  if (profiles.length === 0) {
     return (
       <Card>
         <p className="text-wisdom-muted text-sm">
@@ -125,7 +124,7 @@ export function BookingForm({ services, children }: BookingFormProps) {
           onChange={(e) => setChildId((e.target as HTMLSelectElement).value)}
         >
           <option value="">Select a child…</option>
-          {children.map((c) => (
+          {profiles.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
             </option>

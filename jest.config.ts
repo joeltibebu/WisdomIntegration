@@ -1,6 +1,6 @@
 import type { Config } from 'jest'
 
-const config: Config = {
+const config: any = {
   testEnvironment: 'jsdom',
   setupFilesAfterFramework: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: { '^@/(.*)$': '<rootDir>/$1' },

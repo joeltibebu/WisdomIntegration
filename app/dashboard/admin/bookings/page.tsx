@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
@@ -78,9 +79,18 @@ export default async function AdminBookingsPage({ searchParams }: PageProps) {
     distinct: ["serviceType"],
     orderBy: { serviceType: "asc" },
   });
-  const serviceTypes = allServiceTypes.map((s) => s.serviceType);
+  const serviceTypes = allServiceTypes.map((s: { serviceType: string }) => s.serviceType);
+  
+  interface SessionWithDetails {
+    id: string;
+    child: { name: string };
+    therapist: { name: string };
+    serviceType: string;
+    scheduledAt: Date;
+    status: "SCHEDULED" | "COMPLETED" | "CANCELLED";
+  }
 
-  const rows: BookingRow[] = sessions.map((s) => ({
+  const rows: BookingRow[] = (sessions as unknown as SessionWithDetails[]).map((s) => ({
     id: s.id,
     childName: s.child.name,
     therapistName: s.therapist.name,

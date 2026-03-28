@@ -7,7 +7,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-export default function GlobalError({ error, reset }: ErrorProps) {
+export default function GlobalError({ reset }: ErrorProps) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-wisdom-bg px-4">
       <div className="bg-wisdom-surface rounded-card shadow-md p-8 max-w-md w-full text-center">

@@ -17,11 +17,11 @@ interface Therapist {
 }
 
 interface AssignTherapistFormProps {
-  children: Child[];
+  profiles: Child[];
   therapists: Therapist[];
 }
 
-export function AssignTherapistForm({ children, therapists }: AssignTherapistFormProps) {
+export function AssignTherapistForm({ profiles, therapists }: AssignTherapistFormProps) {
   const router = useRouter();
   const [form, setForm] = useState({ childId: "", therapistId: "" });
   const [errors, setErrors] = useState<{ childId?: string; therapistId?: string; general?: string }>({});
@@ -113,7 +113,7 @@ export function AssignTherapistForm({ children, therapists }: AssignTherapistFor
         error={errors.childId}
       >
         <option value="">Select a child…</option>
-        {children.map((c) => (
+        {profiles.map((c) => (
           <option key={c.id} value={c.id}>
             {c.name}{c.therapistName ? ` (currently: ${c.therapistName})` : ""}
           </option>

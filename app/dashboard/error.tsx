@@ -7,7 +7,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-export default function DashboardError({ error, reset }: ErrorProps) {
+export default function DashboardError({ reset }: ErrorProps) {
   return (
     <div className="flex items-center justify-center min-h-[60vh] px-4">
       <div className="bg-wisdom-surface rounded-card shadow-md p-8 max-w-md w-full text-center">

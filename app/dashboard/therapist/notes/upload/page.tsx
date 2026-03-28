@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -12,7 +13,7 @@ export default async function UploadReportPage() {
   if (!session) redirect("/auth/login");
   if (session.user.role !== "THERAPIST") redirect("/auth/login");
 
-  const children = await prisma.childProfile.findMany({
+  const profiles = await prisma.childProfile.findMany({
     where: { therapistId: session.user.id },
     orderBy: { name: "asc" },
     select: { id: true, name: true },
@@ -38,15 +39,16 @@ export default async function UploadReportPage() {
         </div>
 
         <Card>
-          {children.length === 0 ? (
+          {profiles.length === 0 ? (
             <p className="text-sm text-wisdom-muted text-center py-8">
               No children assigned to you yet.
             </p>
           ) : (
-            <ProgressReportUploadForm children={children} />
+            <ProgressReportUploadForm profiles={profiles} />
           )}
         </Card>
       </div>
     </DashboardShell>
   );
 }
+

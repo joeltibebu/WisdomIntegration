@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // This page is a server component that re-fetches on every request, so the
 // schedule is always up to date without any additional real-time logic needed.
 // Next.js server components do not cache by default in dynamic routes, ensuring
@@ -179,3 +180,4 @@ export default async function SchedulePage() {
     </DashboardShell>
   );
 }
+

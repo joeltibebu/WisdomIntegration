@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { ThemeToggle } from "./ui/ThemeToggle";
 import { LanguageSelector } from "./ui/LanguageSelector";
 
@@ -64,7 +65,7 @@ export function NavBar() {
             aria-label="Wisdom Integration — Home"
           >
             <div className="relative">
-              <img src="/logo.png" alt="Logo" className="h-10 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105" />
+              <Image src="/logo.png" alt="Logo" width={100} height={44} className="h-10 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105" priority />
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-black text-lg leading-none tracking-tight text-wisdom-text">

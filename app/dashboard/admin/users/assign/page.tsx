@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
@@ -41,8 +42,9 @@ export default async function AssignTherapistPage() {
             Link a child profile to a therapist.
           </p>
         </div>
-        <AssignTherapistForm children={children} therapists={therapists} />
+        <AssignTherapistForm profiles={children} therapists={therapists} />
       </div>
     </DashboardShell>
   );
 }
+

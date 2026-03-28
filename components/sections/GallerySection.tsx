@@ -73,7 +73,7 @@ export function GallerySection() {
           Ministry in Action
         </h2>
         <p className="text-wisdom-muted font-medium text-lg max-w-2xl">
-          Glimpses of God's grace at work within our community—from vibrant worship gatherings to specialized family support sessions.
+          Glimpses of God&apos;s grace at work within our community—from vibrant worship gatherings to specialized family support sessions.
         </p>
       </div>
 

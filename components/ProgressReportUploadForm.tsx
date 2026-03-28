@@ -11,10 +11,10 @@ interface Child {
 }
 
 interface ProgressReportUploadFormProps {
-  children: Child[];
+  profiles: Child[];
 }
 
-export function ProgressReportUploadForm({ children }: ProgressReportUploadFormProps) {
+export function ProgressReportUploadForm({ profiles }: ProgressReportUploadFormProps) {
   const [childId, setChildId] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number | undefined>(undefined);
@@ -115,7 +115,7 @@ export function ProgressReportUploadForm({ children }: ProgressReportUploadFormP
         disabled={isLoading}
       >
         <option value="">Select a child…</option>
-        {children.map((c) => (
+        {profiles.map((c) => (
           <option key={c.id} value={c.id}>
             {c.name}
           </option>

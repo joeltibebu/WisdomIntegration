@@ -69,7 +69,8 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-6 text-wisdom-muted text-[1.1rem] leading-loose font-light">
                   <p>
-                    Wisdom Integration Ministry is the name of our service. Its meaning is "integrating with wisdom". The founders who received this vision are Brother Daniel Takele and Sister Yenenesh. 
+                    Wisdom Integration Ministry is the name of our service. Its meaning is &quot;integrating with wisdom&quot;. 
+The founders who received this vision are Brother Daniel Takele and Sister Yenenesh. 
                   </p>
                   <p className="font-amharic opacity-90 leading-loose border-l-2 border-wisdom-green/30 pl-6 text-lg italic">
                     ዊዝደም ኢንቲግሬሽን ሚኒስትሪ የአገልግሎታችን ስም ነው፡፡ ትርጉሙ በጥበብ መቀላቀል ማለት ነው፡፡ ይህን ራዕይ ተቀብለው ወደ እኛ ያመጡ ቤተስቦች ወንድም ዳንኤል ታከለ እና እህት የኔነሽ ይባላሉ፡፡
@@ -85,7 +86,7 @@ export default function AboutPage() {
               <div className="order-2 lg:order-1 space-y-8">
                 <span className="text-wisdom-green font-bold tracking-[0.2em] uppercase text-sm border-l-4 border-wisdom-green pl-4">A Turning Point</span>
                 <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-wisdom-text leading-tight tracking-tight">
-                  <span className="text-wisdom-green">Kaleb's</span> Story
+                  <span className="text-wisdom-green">Kaleb&apos;s</span> Story
                 </h2>
                 <div className="space-y-6 text-wisdom-muted text-[1.1rem] leading-loose font-light">
                   <p>
@@ -111,7 +112,7 @@ export default function AboutPage() {
 
                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center w-3/4 bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-700">
                     <p className="text-white font-amharic font-bold text-xl leading-relaxed drop-shadow-sm">
-                      "ጥበብ ፍቅር ነው፡፡ ግዜንና እውቀትን መስጠት ነው፡፡"
+                      &quot;ጥበብ ፍቅር ነው፡፡ ግዜንና እውቀትን መስጠት ነው፡፡&quot;
                     </p>
                  </div>
               </div>
