@@ -5,7 +5,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { CTASection } from "@/components/sections/CTASection";
-import { Button } from "@/components/ui/Button";
 
 export const dynamic = "force-dynamic";
 

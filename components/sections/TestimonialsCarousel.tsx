@@ -44,6 +44,7 @@ export function TestimonialsCarousel({ items }: Props) {
       setCurrent((c) => (c + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
