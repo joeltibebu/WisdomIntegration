@@ -10,7 +10,7 @@ import bcrypt from 'bcryptjs'
 
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET ?? "Ul83KS1nUysiPE5EPXt7alUjYSJPMWliXHhebGdqKjQ=",
   providers: [
     CredentialsProvider({
       name: 'credentials',
