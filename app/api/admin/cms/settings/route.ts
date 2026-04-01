@@ -46,10 +46,12 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ data: null, error: { code: "VALIDATION_ERROR", fields: result.error.issues } }, { status: 400 });
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const jsonValue = result.data.value as any;
     const item = await prisma.siteSetting.upsert({
       where: { key: result.data.key },
-      update: { value: result.data.value },
-      create: { key: result.data.key, value: result.data.value },
+      update: { value: jsonValue },
+      create: { key: result.data.key, value: jsonValue },
     });
     return NextResponse.json({ data: item, error: null });
   } catch (err) {
