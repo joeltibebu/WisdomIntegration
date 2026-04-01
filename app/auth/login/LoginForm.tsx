@@ -42,6 +42,7 @@ export function LoginForm({ error, expired }: LoginFormProps) {
 
       if (result?.error) {
         setIsLoading(false);
+        setFieldErrors({ password: "Invalid email or password. Please try again." });
         return;
       }
 
