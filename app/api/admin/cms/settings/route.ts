@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const schema = z.object({
   key: z.string().min(1, "Key is required"),
-  value: z.record(z.unknown()),
+  value: z.record(z.string(), z.unknown()),
 });
 
 async function requireAdmin() {
