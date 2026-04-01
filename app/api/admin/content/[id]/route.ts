@@ -9,6 +9,7 @@ const updateSchema = z.object({
   title: z.string().min(1, "Title is required").optional(),
   slug: z.string().min(1, "Slug is required").optional(),
   body: z.string().min(1, "Body is required").optional(),
+  imageUrl: z.string().optional().nullable(),
   published: z.boolean().optional(),
 });
 

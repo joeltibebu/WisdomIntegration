@@ -11,6 +11,7 @@ interface ContentPostFormProps {
     title: string;
     slug: string;
     body: string;
+    imageUrl?: string | null;
     published: boolean;
   };
 }
@@ -29,6 +30,7 @@ export function ContentPostForm({ postId, defaultValues }: ContentPostFormProps)
   const [title, setTitle] = useState(defaultValues?.title ?? "");
   const [slug, setSlug] = useState(defaultValues?.slug ?? "");
   const [body, setBody] = useState(defaultValues?.body ?? "");
+  const [imageUrl, setImageUrl] = useState(defaultValues?.imageUrl ?? "");
   const [published, setPublished] = useState(defaultValues?.published ?? false);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(!!postId);
   const [errors, setErrors] = useState<{ title?: string; slug?: string; body?: string }>({});
@@ -74,7 +76,7 @@ export function ContentPostForm({ postId, defaultValues }: ContentPostFormProps)
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: title.trim(), slug: slug.trim(), body: body.trim(), published }),
+        body: JSON.stringify({ title: title.trim(), slug: slug.trim(), body: body.trim(), imageUrl: imageUrl.trim() || null, published }),
       });
       const json = await res.json();
       if (!res.ok || json.error) {
@@ -110,6 +112,17 @@ export function ContentPostForm({ postId, defaultValues }: ContentPostFormProps)
         error={errors.slug}
         placeholder="post-slug"
       />
+      <FormField
+        id="imageUrl"
+        label="Featured Image URL"
+        value={imageUrl}
+        onChange={(e) => setImageUrl((e.target as HTMLInputElement).value)}
+        placeholder="/images/article-cover.jpg or https://..."
+      />
+      {imageUrl && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={imageUrl} alt="Preview" className="w-full max-h-48 object-cover rounded-xl border border-wisdom-border" />
+      )}
       <FormField
         id="body"
         label="Body"

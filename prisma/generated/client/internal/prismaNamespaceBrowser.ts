@@ -61,7 +61,13 @@ export const ModelName = {
   Service: 'Service',
   ContentPost: 'ContentPost',
   Book: 'Book',
-  GalleryImage: 'GalleryImage'
+  GalleryImage: 'GalleryImage',
+  HeroSection: 'HeroSection',
+  HomepageFeature: 'HomepageFeature',
+  PageBlock: 'PageBlock',
+  Event: 'Event',
+  Testimonial: 'Testimonial',
+  SiteSetting: 'SiteSetting'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -189,6 +195,7 @@ export const ContentPostScalarFieldEnum = {
   title: 'title',
   slug: 'slug',
   body: 'body',
+  imageUrl: 'imageUrl',
   published: 'published',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
@@ -230,12 +237,113 @@ export const GalleryImageScalarFieldEnum = {
 export type GalleryImageScalarFieldEnum = (typeof GalleryImageScalarFieldEnum)[keyof typeof GalleryImageScalarFieldEnum]
 
 
+export const HeroSectionScalarFieldEnum = {
+  id: 'id',
+  page: 'page',
+  badge: 'badge',
+  badgeAm: 'badgeAm',
+  title: 'title',
+  titleAm: 'titleAm',
+  description: 'description',
+  descriptionAm: 'descriptionAm',
+  backgroundImage: 'backgroundImage',
+  ctaText: 'ctaText',
+  ctaLink: 'ctaLink',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HeroSectionScalarFieldEnum = (typeof HeroSectionScalarFieldEnum)[keyof typeof HeroSectionScalarFieldEnum]
+
+
+export const HomepageFeatureScalarFieldEnum = {
+  id: 'id',
+  order: 'order',
+  href: 'href',
+  badge: 'badge',
+  badgeAm: 'badgeAm',
+  title: 'title',
+  titleAm: 'titleAm',
+  description: 'description',
+  descriptionAm: 'descriptionAm',
+  color: 'color',
+  accentColor: 'accentColor',
+  iconPath: 'iconPath',
+  active: 'active'
+} as const
+
+export type HomepageFeatureScalarFieldEnum = (typeof HomepageFeatureScalarFieldEnum)[keyof typeof HomepageFeatureScalarFieldEnum]
+
+
+export const PageBlockScalarFieldEnum = {
+  id: 'id',
+  page: 'page',
+  section: 'section',
+  title: 'title',
+  titleAm: 'titleAm',
+  content: 'content',
+  contentAm: 'contentAm',
+  imageUrl: 'imageUrl',
+  order: 'order'
+} as const
+
+export type PageBlockScalarFieldEnum = (typeof PageBlockScalarFieldEnum)[keyof typeof PageBlockScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  titleAm: 'titleAm',
+  description: 'description',
+  descriptionAm: 'descriptionAm',
+  date: 'date',
+  location: 'location',
+  locationAm: 'locationAm',
+  imageUrl: 'imageUrl',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const TestimonialScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  role: 'role',
+  content: 'content',
+  contentAm: 'contentAm',
+  imageUrl: 'imageUrl',
+  active: 'active',
+  order: 'order'
+} as const
+
+export type TestimonialScalarFieldEnum = (typeof TestimonialScalarFieldEnum)[keyof typeof TestimonialScalarFieldEnum]
+
+
+export const SiteSettingScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SiteSettingScalarFieldEnum = (typeof SiteSettingScalarFieldEnum)[keyof typeof SiteSettingScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -252,4 +360,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

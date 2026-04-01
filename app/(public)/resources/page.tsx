@@ -11,60 +11,38 @@ export const metadata: Metadata = {
   description: "Discover the story behind Wisdom Integration Ministry written in a deeply personal book about faith, resilience, and raising a child with special needs.",
 };
 
-const chapters = [
-  {
-    num: "01",
-    titleEn: "The Beginning of the Journey",
-    titleAm: "የጉዞው መጀመሪያ",
-    descEn: "The raw, honest account of the early days — the diagnosis, the confusion, and the first steps of faith that changed everything.",
-    color: "text-wisdom-blue",
-    border: "border-wisdom-blue/20"
-  },
-  {
-    num: "02",
-    titleEn: "Finding Strength in the Valley",
-    titleAm: "በሸለቆው ውስጥ ጥንካሬ ማግኘት",
-    descEn: "How a family found spiritual resilience when every door seemed closed — and what God revealed in the darkest seasons.",
-    color: "text-wisdom-green",
-    border: "border-wisdom-green/20"
-  },
-  {
-    num: "03",
-    titleEn: "The Power of Community",
-    titleAm: "የማኅበረሰብ ኃይል",
-    descEn: "Why belonging matters deeply, and how building an inclusive community became the foundation of the entire ministry.",
-    color: "text-wisdom-orange",
-    border: "border-wisdom-orange/20"
-  },
-  {
-    num: "04",
-    titleEn: "From Pain to Purpose",
-    titleAm: "ከሥቃይ ወደ ዓላማ",
-    descEn: "The turning point that transformed a family's private struggle into a nationwide call to serve, heal, and love.",
-    color: "text-wisdom-yellow",
-    border: "border-wisdom-yellow/20"
-  },
-];
+import { prisma } from "@/lib/prisma";
 
-const testimonials = [
-  {
-    quote: "This book gave us the language to describe our pain — and the hope to keep going. We read it as a family.",
-    author: "Miriam & Samuel T.",
-    role: "Parents of a child with Autism"
-  },
-  {
-    quote: "I felt seen for the first time. The honesty in every page ministered to my soul like nothing else.",
-    author: "Pastor Bekele A.",
-    role: "Community Minister"
-  },
-  {
-    quote: "A must-read for every family, counselor, and church leader walking alongside special needs families.",
-    author: "Dr. Hannah K.",
-    role: "Family Therapist"
-  }
-];
+export const dynamic = "force-dynamic";
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+  const [books, posts] = await Promise.all([
+    prisma.book.findMany({ where: { active: true }, orderBy: { createdAt: "desc" } }),
+    prisma.contentPost.findMany({ where: { published: true }, orderBy: { publishedAt: "desc" } }),
+  ]);
+
+  const featuredBook = books[0] || {
+    title: "From Our Journey to Yours",
+    titleAm: "ከእኛ ጉዞ ወደ ዎኝ",
+    author: "Brother Daniel and Sister Yenenesh Takele",
+    description: "Written by the founders of Wisdom Integration Ministry, this book is a raw and honest account of what it truly means to raise a child with autism.",
+    descriptionAm: "ዊዝደም ኢንቲግሬሽን ሚኒስትሪ መስራቾች ዳንኤል እና የኔነሽ ታከለ በጻፉት ይህ መጽሐፍ፣ ኦቲዝም ያለው ልጅን ማሳደግ ምን ማለት እንደሆነ ይናገራል፡፡",
+    coverImageUrl: "/images/book-cover.png",
+  };
+
+  const chapters = [
+    { num: "01", titleEn: "The Beginning of the Journey", titleAm: "የጉዞው መጀመሪያ", descEn: "The raw, honest account of the early days — the diagnosis, the confusion, and the first steps of faith.", color: "text-wisdom-blue", border: "border-wisdom-blue/20" },
+    { num: "02", titleEn: "Finding Strength in the Valley", titleAm: "በሸለቆው ውስጥ ጥንካሬ ማግኘት", descEn: "How a family found spiritual resilience when every door seemed closed.", color: "text-wisdom-green", border: "border-wisdom-green/20" },
+    { num: "03", titleEn: "The Power of Community", titleAm: "የማኅበረሰብ ኃይል", descEn: "Why belonging matters deeply, and how building an inclusive community became the foundation.", color: "text-wisdom-orange", border: "border-wisdom-orange/20" },
+    { num: "04", titleEn: "From Pain to Purpose", titleAm: "ከሥቃይ ወደ ዓላማ", descEn: "The turning point that transformed a family's private struggle into a nationwide call to serve.", color: "text-wisdom-yellow", border: "border-wisdom-yellow/20" },
+  ];
+
+  const testimonials = [
+    { quote: "This book gave us the language to describe our pain — and the hope to keep going.", author: "Miriam & Samuel T.", role: "Parents" },
+    { quote: "I felt seen for the first time. The honesty in every page ministered to my soul.", author: "Pastor Bekele A.", role: "Minister" },
+    { quote: "A must-read for every family, counselor, and church leader.", author: "Dr. Hannah K.", role: "Therapist" }
+  ];
+
   return (
     <div className="min-h-screen bg-wisdom-bg">
       <SubPageHero
@@ -77,7 +55,7 @@ export default function ResourcesPage() {
       />
 
       {/* ── BOOK SHOWCASE ─────────────────────────────────────── */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section id="book" className="py-16 px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
 
@@ -86,8 +64,8 @@ export default function ResourcesPage() {
               <div className="absolute inset-0 bg-wisdom-blue/10 rounded-full blur-[100px] opacity-50 -translate-x-10" />
               <div className="relative z-10 w-full max-w-[320px]">
                 <Image
-                  src="/images/book-cover.png"
-                  alt="From Our Journey to Yours"
+                  src={featuredBook.coverImageUrl || "/images/book-cover.png"}
+                  alt={featuredBook.title}
                   width={400}
                   height={560}
                   className="w-full rounded-2xl shadow-[0_30px_70px_rgba(30,75,155,0.3)] rotate-1 hover:rotate-0 transition-transform duration-500"
@@ -107,19 +85,20 @@ export default function ResourcesPage() {
                   Featured Publication / ዋና ጽሑፍ
                 </span>
                 <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-wisdom-text leading-tight tracking-tight mb-2">
-                  From Our Journey <br className="hidden sm:block" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-wisdom-blue to-wisdom-green">to Yours.</span>
+                  {featuredBook.title}
                 </h2>
-                <p className="font-amharic text-wisdom-muted text-xl opacity-80">ከእኛ ጉዞ ወደ ዎኝ</p>
+                <p className="font-amharic text-wisdom-muted text-xl opacity-80">{featuredBook.titleAm}</p>
               </div>
 
               <div className="space-y-4 text-wisdom-muted text-lg leading-relaxed font-medium">
                 <p>
-                  Written by <span className="text-wisdom-text font-bold">Brother Daniel and Sister Yenenesh Takele</span>, founders of Wisdom Integration Ministry, this book is a raw and honest account of what it truly means to raise a child with autism — through exhaustion, doubt, faith, and ultimately, breakthrough.
+                  Written by <span className="text-wisdom-text font-bold">{featuredBook.author}</span>, this book is a raw and honest account of faith, resilience, and breakthroughs in the special needs journey.
                 </p>
-                <p className="font-amharic text-base opacity-80 border-l-4 border-wisdom-yellow/40 pl-5 py-1">
-                  ዊዝደም ኢንቲግሬሽን ሚኒስትሪ መስራቾች ዳንኤል እና የኔነሽ ታከለ በጻፉት ይህ መጽሐፍ፣ ኦቲዝም ያለው ልጅን ማሳደግ ምን ማለት እንደሆነ — ድካምን፣ ጥርጣሬን፣ እምነትን እና በመጨረሻም ድልን — ይናገራል፡፡
-                </p>
+                {featuredBook.descriptionAm && (
+                  <p className="font-amharic text-base opacity-80 border-l-4 border-wisdom-yellow/40 pl-5 py-1">
+                    {featuredBook.descriptionAm}
+                  </p>
+                )}
               </div>
 
               {/* Stats */}
@@ -229,6 +208,64 @@ export default function ResourcesPage() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── ARTICLES & RESOURCES ──────────────────────────────── */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="inline-block py-1 px-4 rounded-full bg-white dark:bg-wisdom-surface border border-slate-200 dark:border-white/10 text-wisdom-green font-bold text-xs tracking-[0.2em] uppercase mb-4 shadow-sm">
+              Articles & Guides
+            </span>
+            <h3 className="font-heading font-extrabold text-3xl sm:text-4xl text-wisdom-text tracking-tight">
+              Educational Resources
+            </h3>
+            <p className="text-wisdom-muted mt-3 max-w-xl mx-auto">
+              Practical guides, articles, and insights for families navigating the special needs journey.
+            </p>
+          </div>
+
+          {posts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {posts.map((post) => (
+                <article
+                  key={post.id}
+                  className="bg-white dark:bg-wisdom-surface border border-slate-200 dark:border-white/10 rounded-[2rem] p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                >
+                  <div className="flex-1">
+                    <span className="inline-block text-[10px] font-black uppercase tracking-[0.2em] text-wisdom-green mb-3">
+                      {post.publishedAt
+                        ? new Date(post.publishedAt).toLocaleDateString("en-US", { dateStyle: "medium" })
+                        : "Resource"}
+                    </span>
+                    <h4 className="font-heading font-bold text-lg text-wisdom-text mb-3 leading-snug">
+                      {post.title}
+                    </h4>
+                    <p className="text-wisdom-muted text-sm leading-relaxed line-clamp-3">
+                      {post.body.slice(0, 160)}…
+                    </p>
+                  </div>
+                  <Link
+                    href={`/resources/${post.slug}`}
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-wisdom-blue hover:gap-3 transition-all focus:outline-none focus:ring-2 focus:ring-wisdom-blue rounded"
+                  >
+                    Read More
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16 bg-white dark:bg-wisdom-surface border border-slate-200 dark:border-white/10 rounded-[2rem]">
+              <p className="text-wisdom-muted text-lg">Articles and guides coming soon.</p>
+              <Link href="/contact" className="mt-4 inline-block text-wisdom-blue font-bold hover:underline">
+                Contact us to learn more
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

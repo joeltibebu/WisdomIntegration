@@ -28,6 +28,7 @@ const navLinks = [
     ]
   },
   { href: "/resources", label: "Resources", labelAm: "ግብአቶች" },
+  { href: "/bookshelf", label: "Bookshelf", labelAm: "መጻሕፍት" },
   { href: "/contact", label: "Contact", labelAm: "ያግኙን" },
 ];
 

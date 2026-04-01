@@ -9,6 +9,7 @@ const postSchema = z.object({
   title: z.string().min(1, "Title is required"),
   slug: z.string().min(1, "Slug is required"),
   body: z.string().min(1, "Body is required"),
+  imageUrl: z.string().optional().nullable(),
   published: z.boolean().optional().default(false),
 });
 
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { title, slug, body: postBody, published } = result.data;
+  const { title, slug, body: postBody, imageUrl, published } = result.data;
 
   try {
     const post = await prisma.contentPost.create({
@@ -75,6 +76,7 @@ export async function POST(req: NextRequest) {
         title,
         slug,
         body: postBody,
+        imageUrl: imageUrl ?? null,
         published,
         publishedAt: published ? new Date() : null,
       },

@@ -98,7 +98,8 @@ const navItemsByRole: Record<Role, NavItem[]> = {
     { href: "/dashboard/admin/users", label: "Users", icon: <UsersIcon /> },
     { href: "/dashboard/admin/bookings", label: "Bookings", icon: <CalendarIcon /> },
     { href: "/dashboard/admin/services", label: "Services", icon: <CogIcon /> },
-    { href: "/dashboard/admin/content", label: "Content", icon: <DocumentIcon /> },
+    { href: "/dashboard/admin/content", label: "Blog Posts", icon: <DocumentIcon /> },
+    { href: "/dashboard/admin/cms", label: "Website Content", icon: <HomeIcon /> },
     { href: "/dashboard/admin/analytics", label: "Analytics", icon: <ChartIcon /> },
   ],
 };

@@ -8,7 +8,8 @@ interface Testimonial {
   role: string;
 }
 
-const testimonials: Testimonial[] = [
+// Fallback data used when no DB records exist yet
+const fallbackTestimonials: Testimonial[] = [
   {
     quote: "Wisdom Integration changed everything for us. Before, we were hiding our son out of shame and simply didn't know how to cope. Now, we've found a community that embraces him as a true gift from God.",
     author: "Sarah & Daniel M.",
@@ -26,7 +27,15 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-export function TestimonialsCarousel() {
+interface Props {
+  items?: { content: string; name: string; role?: string | null }[];
+}
+
+export function TestimonialsCarousel({ items }: Props) {
+  const testimonials: Testimonial[] =
+    items && items.length > 0
+      ? items.map((t) => ({ quote: t.content, author: t.name, role: t.role ?? "" }))
+      : fallbackTestimonials;
   const [current, setCurrent] = useState(0);
 
   // Auto-scroll logic

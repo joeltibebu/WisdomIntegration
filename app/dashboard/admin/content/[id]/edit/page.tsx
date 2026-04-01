@@ -31,6 +31,7 @@ export default async function EditContentPage({ params }: PageProps) {
             title: post.title,
             slug: post.slug,
             body: post.body,
+            imageUrl: post.imageUrl,
             published: post.published,
           }}
         />

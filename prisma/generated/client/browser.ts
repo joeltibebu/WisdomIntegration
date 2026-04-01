@@ -72,3 +72,33 @@ export type Book = Prisma.BookModel
  * 
  */
 export type GalleryImage = Prisma.GalleryImageModel
+/**
+ * Model HeroSection
+ * 
+ */
+export type HeroSection = Prisma.HeroSectionModel
+/**
+ * Model HomepageFeature
+ * 
+ */
+export type HomepageFeature = Prisma.HomepageFeatureModel
+/**
+ * Model PageBlock
+ * 
+ */
+export type PageBlock = Prisma.PageBlockModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model Testimonial
+ * 
+ */
+export type Testimonial = Prisma.TestimonialModel
+/**
+ * Model SiteSetting
+ * 
+ */
+export type SiteSetting = Prisma.SiteSettingModel

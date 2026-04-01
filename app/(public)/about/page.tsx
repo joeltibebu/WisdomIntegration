@@ -11,32 +11,37 @@ export const metadata: Metadata = {
   description: "Learn about the Wisdom Integration Ministry, founders Daniel Takele and Yenenesh, and the purpose behind our services.",
 };
 
-export default function AboutPage() {
-  const outcomesEn = [
-    { text: "For the nation to accept that all children are God's gift, helping those hidden in shame or sorrow to come out and integrate." },
-    { text: "This wisdom is love. It is the active giving of time and knowledge." },
-    { text: "Above all, to preach the Gospel which reconciles man with God, revealing the true meaning of life." },
-    { text: "To achieve this, we need truly prepared, dedicated children of God." },
-    { text: "Following our Lord's lifestyle, let us be unforgettable friends, providing holistic healing to those with sick emotions and spirits for their earthly and spiritual lives." }
-  ];
+import { prisma } from "@/lib/prisma";
 
-  const outcomesAm = [
-    { text: "ልጆች ሁሉ የእግዚአብሔር ስጦታ መሆናቸውን አገር አምኖ ተቀብሎ በእድገታቸው ውስንነት ምክንያት አፍረውና አዝነው ቤታቸው የተቀመጡ ወጥተው አንዲቀላቀሉ ነው::" },
-    { text: "ይህ ጥበብ ፍቅር ነው፡፡ ግዜን እውቀትን መስጠት ነው፡፡" },
-    { text: "ከሁሉም በላይ ሰውና እግዚአብሔርን የሚያስታርቀውን የመኖርን የሚነግረንን መንገድና ትርጉም ወንጌል መስበክ ነው፡፡" },
-    { text: "ለዚህም እውነተኛ የተዘጋጁ የእግዚአብሔር ልጆች ያስፈልጉናል::" },
-    { text: "ጌታ የተወልንን የኑሮ ምሳሌ ተከትለን ከዊዝደም ኢንቲግሬሽን ሚኒስትሪ ጋር በመስራት ስሜታቸው እና መንፈሳቸው ለታመመባቸው መድኃኒት እንስጥ። አብረን ለመንፈሳቸውም ለምድራዊ ኑሮአቸውም በሁለንተናዊ አገልግሎት እየሰጠን የማይረሳ ወዳጅ እንሁናቸው፡፡" }
-  ];
+export const dynamic = "force-dynamic";
+
+export default async function AboutPage() {
+  // Fetch all content for the about page
+  const [hero, blocks] = await Promise.all([
+    prisma.heroSection.findUnique({ where: { page: "about" } }),
+    prisma.pageBlock.findMany({ 
+      where: { page: "about" },
+      orderBy: { order: "asc" }
+    })
+  ]);
+
+  // Helper to find specific sections
+  const getBlock = (section: string) => blocks.find(b => b.section === section);
+  const outcomes = blocks.filter(b => b.section === "outcome");
+
+  const storyFounders = getBlock("story-founders");
+  const storyKaleb = getBlock("story-kaleb");
+  const purposeMain = getBlock("purpose-main");
 
   return (
     <div className="min-h-screen bg-transparent overflow-x-hidden">
       <SubPageHero 
-        badgeEn="Our Emotional Journey" 
-        badgeAm="ስሜታዊ ጉዞአችን" 
-        titleEn="Wisdom Integration Ministry" 
-        titleAm="ዊዝደም ኢንቲግሬሽን ሚኒስትሪ" 
-        descriptionEn="A story of unconditional love, unyielding faith, and the transformation of a family's trial into a nationwide ministry."
-        descriptionAm="የወንድም ዳንኤል እና የእህት የኔነሽን ታሪክ፣ እንዲሁም በጥበብ የመቀላቀልን ራዕይ ይወቁ።"
+        badgeEn={hero?.badge || "Our Emotional Journey"} 
+        badgeAm={hero?.badgeAm || "ስሜታዊ ጉዞአችን"} 
+        titleEn={hero?.title || "Wisdom Integration Ministry"} 
+        titleAm={hero?.titleAm || "ዊዝደም ኢንቲግሬሽን ሚኒስትሪ"} 
+        descriptionEn={hero?.description || ""}
+        descriptionAm={hero?.descriptionAm || ""}
       />
 
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-32">
@@ -65,15 +70,14 @@ export default function AboutPage() {
               <div className="space-y-8">
                 <span className="text-wisdom-blue font-bold tracking-[0.2em] uppercase text-sm border-l-4 border-wisdom-blue pl-4">The Journey Begins</span>
                 <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-wisdom-text leading-tight tracking-tight">
-                  Integrating with <br/><span className="text-wisdom-blue">Wisdom.</span>
+                  {storyFounders?.title}
                 </h2>
                 <div className="space-y-6 text-wisdom-muted text-[1.1rem] leading-loose font-light">
                   <p>
-                    Wisdom Integration Ministry is the name of our service. Its meaning is &quot;integrating with wisdom&quot;. 
-The founders who received this vision are Brother Daniel Takele and Sister Yenenesh. 
+                    {storyFounders?.content}
                   </p>
                   <p className="font-amharic opacity-90 leading-loose border-l-2 border-wisdom-green/30 pl-6 text-lg italic">
-                    ዊዝደም ኢንቲግሬሽን ሚኒስትሪ የአገልግሎታችን ስም ነው፡፡ ትርጉሙ በጥበብ መቀላቀል ማለት ነው፡፡ ይህን ራዕይ ተቀብለው ወደ እኛ ያመጡ ቤተስቦች ወንድም ዳንኤል ታከለ እና እህት የኔነሽ ይባላሉ፡፡
+                    {storyFounders?.contentAm}
                   </p>
                 </div>
               </div>
@@ -86,14 +90,14 @@ The founders who received this vision are Brother Daniel Takele and Sister Yenen
               <div className="order-2 lg:order-1 space-y-8">
                 <span className="text-wisdom-green font-bold tracking-[0.2em] uppercase text-sm border-l-4 border-wisdom-green pl-4">A Turning Point</span>
                 <h2 className="font-heading font-extrabold text-4xl sm:text-5xl text-wisdom-text leading-tight tracking-tight">
-                  <span className="text-wisdom-green">Kaleb&apos;s</span> Story
+                  {storyKaleb?.title}
                 </h2>
                 <div className="space-y-6 text-wisdom-muted text-[1.1rem] leading-loose font-light">
                   <p>
-                    Their second child, Kaleb, has lived with autism for the last 20 years. To share the wisdom they used to raise their child and help other families like theirs, they established this ministry alongside their friends.
+                    {storyKaleb?.content}
                   </p>
                   <p className="font-amharic opacity-90 leading-loose border-l-2 border-wisdom-yellow/50 pl-6 text-lg italic">
-                    በቤታቸው ውስጥ ሁለተኛ ልጃቸው ካሌብ ይባላል፣ ላለፉት 20 ዓመታት የኦትዝም ተጠቂ ነው:: ልጃቸውን ለማሳደግ የተጠቀሙበትን ጥበብ በማካፈል ለሌሎች እንደነሱ ያሉ ቤተሰቦችን ለመርዳት ሲሉ ይህን አገልግሎት ከጓደኞቻቸው ጋር መስርተዋል::
+                    {storyKaleb?.contentAm}
                   </p>
                 </div>
               </div>
@@ -133,9 +137,9 @@ The founders who received this vision are Brother Daniel Takele and Sister Yenen
                  <div className="w-16 h-16 rounded-2xl bg-wisdom-orange flex items-center justify-center text-white mb-8 shadow-lg group-hover:-translate-y-2 transition-transform duration-500">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
                  </div>
-                 <h3 className="font-heading font-extrabold text-3xl text-wisdom-text mb-6">Our Core Purpose</h3>
+                 <h3 className="font-heading font-extrabold text-3xl text-wisdom-text mb-6">{purposeMain?.title}</h3>
                  <p className="text-wisdom-muted text-lg leading-loose font-light">
-                   The primary purpose of Wisdom Integration is to help families whose hearts are broken because of the challenges with their children find their way to the Lord—the only one who can truly mend the broken. We strive to assist them so their brokenness can be healed through the radiant light of His Word.
+                   {purposeMain?.content}
                  </p>
               </div>
 
@@ -143,9 +147,9 @@ The founders who received this vision are Brother Daniel Takele and Sister Yenen
                  <div className="w-16 h-16 rounded-2xl bg-wisdom-blue flex items-center justify-center text-white mb-8 shadow-lg group-hover:-translate-y-2 transition-transform duration-500">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                  </div>
-                 <h3 className="font-amharic font-extrabold text-3xl text-wisdom-text mb-6 mt-1">የዊዝደም ኢንተግሬሽን ዓላማ</h3>
+                 <h3 className="font-amharic font-extrabold text-3xl text-wisdom-text mb-6 mt-1">{purposeMain?.titleAm}</h3>
                  <p className="font-amharic text-wisdom-text opacity-80 text-lg leading-[2.2]">
-                   በልጆቻቸው ምክንያት ልባቸው ለተሰበረባቸው ቤተሰቦች የተስበረን መጠገን ወደሚችለው ጌታ እንዲመጡ እና ስብራታቸውን በቃሉ ብርሃን እንዲፈወሱ ማገዝ ነው፡፡
+                   {purposeMain?.contentAm}
                  </p>
               </div>
             </div>
@@ -161,19 +165,19 @@ The founders who received this vision are Brother Daniel Takele and Sister Yenen
              </div>
 
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {outcomesEn.map((outcome, idx) => (
-                  <div key={idx} className="bg-white/60 dark:bg-wisdom-surface/40 backdrop-blur-2xl p-10 rounded-[2rem] border border-slate-100/50 dark:border-white/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col justify-between">
+                {outcomes.map((outcome, idx) => (
+                  <div key={outcome.id} className="bg-white/60 dark:bg-wisdom-surface/40 backdrop-blur-2xl p-10 rounded-[2rem] border border-slate-100/50 dark:border-white/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden flex flex-col justify-between">
                      <div className="absolute -top-10 -right-10 w-32 h-32 bg-wisdom-blue mix-blend-multiply dark:mix-blend-screen opacity-0 group-hover:opacity-10 blur-2xl transition-opacity"></div>
                      
                      <div className="mb-8">
                        <span className="text-5xl font-heading text-wisdom-blue/20 font-black italic">{idx + 1}</span>
                      </div>
                      <p className="text-lg text-wisdom-muted font-light leading-relaxed mb-8 flex-grow pr-4">
-                       {outcome.text}
+                       {outcome.content}
                      </p>
                      
                      <div className="pt-6 border-t border-slate-100 dark:border-white/10 font-amharic text-[1.1rem] opacity-75 leading-[1.8] text-wisdom-text">
-                       {outcomesAm[idx].text}
+                       {outcome.contentAm}
                      </div>
                   </div>
                 ))}

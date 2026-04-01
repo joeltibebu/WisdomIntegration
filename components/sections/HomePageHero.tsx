@@ -14,9 +14,27 @@ const heroImages = [
   "/images/events/event5.jpeg",
 ];
 
-export function HomePageHero() {
+interface HeroData {
+  badge: string;
+  badgeAm: string;
+  title: string;
+  titleAm: string;
+  description: string;
+  descriptionAm: string;
+  ctaText: string | null;
+  ctaLink: string | null;
+}
+
+export function HomePageHero({ hero }: { hero: HeroData | null }) {
   const { lang } = useLanguage();
   const am = lang === "am";
+
+  // Fallback to defaults if no hero data exists in DB yet
+  const displayBadge = am ? (hero?.badgeAm || "ፍቅር • እንክብካቤ • ፈውስ") : (hero?.badge || "Love • Care • Heal");
+  const displayTitle = am ? (hero?.titleAm || "ፈውስ ተስፋ እና ባለቤትነትን ማምጣት") : (hero?.title || "Bringing Healing, Hope, and Belonging");
+  const displayDesc = am ? (hero?.descriptionAm || "ዊዝደም ኢንቲግሬሽን ሚኒስትሪ ልዩ ፍላጎት ያላቸው ልጆችን ለሚያሳድጉ ቤተሰቦች ከጎናቸው ይቆማል") : (hero?.description || "Wisdom Integration Ministry walks alongside families navigating special needs.");
+  const displayCTA = hero?.ctaText || (am ? "አሁን ይለግሱ" : "Donate Now");
+  const displayLink = hero?.ctaLink || "/donate";
   
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -61,48 +79,24 @@ export function HomePageHero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2.5 py-1.5 px-5 rounded-full bg-white/10 border border-white/20 shadow-sm backdrop-blur-md mb-6">
           <span className="w-2 h-2 rounded-full bg-wisdom-yellow animate-pulse" />
-          {am ? (
-            <span className="font-amharic text-white font-bold text-sm tracking-wide drop-shadow-sm">
-              ፍቅር &bull; እንክብካቤ &bull; ፈውስ
-            </span>
-          ) : (
-            <span className="text-white font-bold text-sm tracking-[0.1em] drop-shadow-sm">
-              Love &bull; Care &bull; Heal
-            </span>
-          )}
+          <span className={`${am ? "font-amharic" : ""} text-white font-bold text-sm tracking-wide drop-shadow-sm`}>
+            {displayBadge}
+          </span>
         </div>
 
         {/* Heading */}
-        <h1 className="font-heading font-extrabold text-5xl sm:text-6xl lg:text-[5rem] text-white mb-4 tracking-tight leading-[1.1] drop-shadow-lg">
-          {am ? (
-            <>
-              <span className="text-wisdom-yellow drop-shadow-md">ፈውስ</span>
-              {" "}ተስፋ እና ባለቤትነትን ማምጣት
-            </>
-          ) : (
-            <>
-              Bringing{" "}
-              <span className="text-wisdom-yellow drop-shadow-md">Healing</span>
-              , Hope, and Belonging
-            </>
-          )}
+        <h1 className={`font-heading font-extrabold text-5xl sm:text-6xl lg:text-[5rem] text-white mb-4 tracking-tight leading-[1.1] drop-shadow-lg ${am ? "font-amharic" : ""}`}>
+          {displayTitle}
         </h1>
 
-        <h2 className="font-heading font-bold text-2xl sm:text-3xl text-white/90 mb-6 tracking-tight drop-shadow-md">
-          {am ? "ዛሬ አገልግሎታችንን ይደግፉ" : "Support Our Ministry Today"}
-        </h2>
-
         <p className={`text-white/80 text-lg sm:text-xl leading-relaxed max-w-3xl mb-10 font-medium drop-shadow-sm ${am ? "font-amharic" : "font-body"}`}>
-          {am
-            ? "ዊዝደም ኢንቲግሬሽን ሚኒስትሪ ልዩ ፍላጎት ያላቸው ልጆችን ለሚያሳድጉ ቤተሰቦች ከጎናቸው ይቆማል — በእምነት፣ በሙያዊ እንክብካቤ እና ሙሉ ተቀባይነት።"
-            : "Wisdom Integration Ministry walks alongside families navigating special needs — with faith, professional care, and radical belonging."
-          }
+          {displayDesc}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <Link href="/donate">
+          <Link href={displayLink}>
             <Button className="px-10 py-6 rounded-full bg-wisdom-blue hover:bg-[#153a7e] text-white font-extrabold text-lg shadow-[0_10px_30px_rgba(30,75,155,0.4)] transition-all hover:-translate-y-1">
-              {am ? "አሁን ይለግሱ" : "Donate Now"}
+              {displayCTA}
             </Button>
           </Link>
           <Link href="/contact">

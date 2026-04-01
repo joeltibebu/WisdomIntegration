@@ -1,6 +1,11 @@
 import { PrismaClient } from '../prisma/generated/client/client'
+import { PrismaPg } from '@prisma/adapter-pg'
+import pg from 'pg'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
+
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
+const adapter = new PrismaPg(pool)
 
 // Query logging is enabled in development to monitor performance.
 // N+1 Prevention: all dashboard queries use Prisma's include/select to eagerly load
@@ -14,7 +19,7 @@ const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({ 
-    accelerateUrl: process.env.DATABASE_URL!,
+    adapter,
     log: process.env.NODE_ENV === 'development' ? ['query', 'error'] : ['error'] 
   })
 
