@@ -8,6 +8,7 @@ import { DashboardShell } from "@/components/DashboardShell";
 const sections = [
   { href: "/dashboard/admin/cms/hero", label: "Hero Sections", description: "Edit hero banners for Home and About pages" },
   { href: "/dashboard/admin/cms/images", label: "Image Manager", description: "Update images for About page, blog posts, and more" },
+  { href: "/dashboard/admin/services", label: "Services", description: "Manage the services shown on the public Services page" },
   { href: "/dashboard/admin/cms/testimonials", label: "Testimonials", description: "Manage family stories shown on the homepage" },
   { href: "/dashboard/admin/cms/events", label: "Events", description: "Create and manage upcoming events and programs" },
   { href: "/dashboard/admin/cms/gallery", label: "Gallery", description: "Manage gallery images" },
