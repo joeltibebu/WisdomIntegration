@@ -160,15 +160,17 @@ async function main() {
     })
   }
 
-  // 5. Books
-  await prisma.book.deleteMany({})
-  await prisma.book.createMany({
-    data: [
-      { title: "From Our Journey to Yours", titleAm: "ከእኛ ጉዞ ወደ እርስዎ", author: "Daniel Takele", description: "Deeply personal account of faith and resilience.", descriptionAm: "ጥልቅ የሆነ የእምነት ታሪክ።", coverImageUrl: "/images/book-cover.png", active: true },
-      { title: "Walking with Grace", titleAm: "በጸጋ መመላለስ", author: "Daniel Takele", description: "Finding strength in God's grace.", descriptionAm: "በእግዚአብሔር ጸጋ ጥንካሬን ማግኘት።", coverImageUrl: "/images/book1.jpeg", active: true },
-      { title: "Family Faith Anchors", titleAm: "የቤተሰብ እምነት መልሕቆች", author: "Yenenesh", description: "Anchoring the family in prayer.", descriptionAm: "ቤተሰብን በጸሎት ማጽናት።", coverImageUrl: "/images/book2.jpeg", active: true }
-    ]
-  })
+  // 5. Books — only seed if none exist
+  const bookCount = await prisma.book.count()
+  if (bookCount === 0) {
+    await prisma.book.createMany({
+      data: [
+        { title: "From Our Journey to Yours", titleAm: "ከእኛ ጉዞ ወደ እርስዎ", author: "Daniel Takele", description: "Deeply personal account of faith and resilience.", descriptionAm: "ጥልቅ የሆነ የእምነት ታሪክ።", coverImageUrl: "/images/book-cover.png", active: true },
+        { title: "Walking with Grace", titleAm: "በጸጋ መመላለስ", author: "Daniel Takele", description: "Finding strength in God's grace.", descriptionAm: "በእግዚአብሔር ጸጋ ጥንካሬን ማግኘት።", coverImageUrl: "/images/book1.jpeg", active: true },
+        { title: "Family Faith Anchors", titleAm: "የቤተሰብ እምነት መልሕቆች", author: "Yenenesh", description: "Anchoring the family in prayer.", descriptionAm: "ቤተሰብን በጸሎት ማጽናት።", coverImageUrl: "/images/book2.jpeg", active: true }
+      ]
+    })
+  }
 
   // 6. Programs (using PageBlock model for simplicity or dedicated model)
   // I'll use the 'HomepageFeature' model as 'slots' or just dedicated PageBlocks.
@@ -280,6 +282,23 @@ async function main() {
       },
     },
   })
+
+  // 10. Services — only seed if none exist
+  const serviceCount = await prisma.service.count()
+  if (serviceCount === 0) {
+    const services = [
+      { name: "Parent Counseling", description: "Compassionate guidance and emotional support for parents navigating the unique challenges of raising a child with developmental needs.", active: true },
+      { name: "Spiritual Care", description: "Faith-based encouragement anchoring families in the truth of the Gospel, offering deep emotional reconciliation and lasting peace.", active: true },
+      { name: "Inclusive Learning", description: "Tailored educational assistance designed to help children with unique limitations discover and reach their full divine potential.", active: true },
+      { name: "Community Integration", description: "Helping families step out of isolation by providing safe, inclusive environments where they belong and are truly valued.", active: true },
+      { name: "Holistic Therapy", description: "Practical therapies encompassing speech, occupational, and behavioral support tailored to nurture earthly and spiritual life.", active: true },
+      { name: "Family Care & Respite", description: "Offering practical assistance and dedicated rest periods for parents so they can recharge and continue loving their families deeply.", active: true },
+    ]
+    for (const s of services) {
+      await prisma.service.create({ data: s })
+    }
+    console.log('Services seeded.')
+  }
 
   console.log('Seed completed successfully.')
 }
