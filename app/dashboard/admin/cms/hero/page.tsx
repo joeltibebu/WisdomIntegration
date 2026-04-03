@@ -1,21 +1,13 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { Button } from "@/components/ui/Button";
 
 export default async function HeroAdminPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const heroes = await prisma.heroSection.findMany({ orderBy: { page: "asc" } });
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
@@ -42,6 +34,6 @@ export default async function HeroAdminPage() {
           )}
         </div>
       </div>
-    </DashboardShell>
+    </>
   );
 }

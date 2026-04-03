@@ -1,23 +1,15 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { DeleteButton } from "@/components/cms/DeleteButton";
 
 export default async function TestimonialsAdminPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const items = await prisma.testimonial.findMany({ orderBy: { order: "asc" } });
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
@@ -54,6 +46,6 @@ export default async function TestimonialsAdminPage() {
           {items.length === 0 && <p className="text-wisdom-muted text-sm">No testimonials yet.</p>}
         </div>
       </div>
-    </DashboardShell>
+    </>
   );
 }

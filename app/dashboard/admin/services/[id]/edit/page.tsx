@@ -1,9 +1,6 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect, notFound } from "next/navigation";
-import { authOptions } from "@/lib/auth";
+import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { ServiceForm } from "@/components/ServiceForm";
 
 interface PageProps {
@@ -11,15 +8,11 @@ interface PageProps {
 }
 
 export default async function EditServicePage({ params }: PageProps) {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const service = await prisma.service.findUnique({ where: { id: params.id } });
   if (!service) notFound();
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-heading font-bold text-wisdom-text">Edit Service</h1>
@@ -30,6 +23,6 @@ export default async function EditServicePage({ params }: PageProps) {
           defaultValues={{ name: service.name, description: service.description }}
         />
       </div>
-    </DashboardShell>
+    </>
   );
 }

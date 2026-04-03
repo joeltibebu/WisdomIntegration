@@ -1,10 +1,6 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { DateRangeFilter } from "@/components/DateRangeFilter";
@@ -43,10 +39,6 @@ function MetricCard({ label, value, description }: MetricCardProps) {
 }
 
 export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const fromDate = searchParams.from ? new Date(searchParams.from) : null;
   const toDate = searchParams.to ? new Date(searchParams.to) : null;
 
@@ -110,7 +102,7 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
   const exportUrl = `/api/admin/analytics?${exportParams.toString()}`;
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
@@ -152,6 +144,6 @@ export default async function AdminAnalyticsPage({ searchParams }: PageProps) {
           />
         </div>
       </div>
-    </DashboardShell>
+    </>
   );
 }

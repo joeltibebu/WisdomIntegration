@@ -1,16 +1,8 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { PageBlockImageEditor } from "@/components/cms/PageBlockImageEditor";
 
 export default async function ImagesAdminPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const [aboutBlocks, posts] = await Promise.all([
     prisma.pageBlock.findMany({
       where: { page: "about" },
@@ -24,7 +16,7 @@ export default async function ImagesAdminPage() {
   const imageBlocks = aboutBlocks.filter((b) => b.imageUrl != null || b.section.startsWith("story"));
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-10">
         <div>
           <h1 className="text-2xl font-heading font-bold text-wisdom-text">Image Manager</h1>
@@ -73,6 +65,6 @@ export default async function ImagesAdminPage() {
           </div>
         </section>
       </div>
-    </DashboardShell>
+    </>
   );
 }

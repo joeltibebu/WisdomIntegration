@@ -1,9 +1,5 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { Badge } from "@/components/ui/Badge";
 import { DataTable, Column } from "@/components/ui/DataTable";
 import { BookingsFilter } from "@/components/BookingsFilter";
@@ -40,10 +36,6 @@ interface PageProps {
 }
 
 export default async function AdminBookingsPage({ searchParams }: PageProps) {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const { therapistId, serviceType, date } = searchParams;
 
   // Build where clause
@@ -80,7 +72,7 @@ export default async function AdminBookingsPage({ searchParams }: PageProps) {
     orderBy: { serviceType: "asc" },
   });
   const serviceTypes = allServiceTypes.map((s: { serviceType: string }) => s.serviceType);
-  
+
   interface SessionWithDetails {
     id: string;
     child: { name: string };
@@ -103,7 +95,7 @@ export default async function AdminBookingsPage({ searchParams }: PageProps) {
   }));
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-heading font-bold text-wisdom-text">Bookings</h1>
@@ -122,6 +114,6 @@ export default async function AdminBookingsPage({ searchParams }: PageProps) {
           emptyMessage="No sessions found."
         />
       </div>
-    </DashboardShell>
+    </>
   );
 }

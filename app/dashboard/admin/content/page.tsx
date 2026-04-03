@@ -1,10 +1,6 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { DataTable, Column } from "@/components/ui/DataTable";
@@ -56,10 +52,6 @@ const columns: Column<PostRow>[] = [
 ];
 
 export default async function AdminContentPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const posts = await prisma.contentPost.findMany({ orderBy: { createdAt: "desc" } });
 
   type DbPost = { id: string; title: string; published: boolean; publishedAt: Date | null };
@@ -71,7 +63,7 @@ export default async function AdminContentPage() {
   }));
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
@@ -93,7 +85,6 @@ export default async function AdminContentPage() {
           emptyMessage="No posts found."
         />
       </div>
-    </DashboardShell>
+    </>
   );
 }
-

@@ -1,10 +1,6 @@
 export const dynamic = "force-dynamic";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { DashboardShell } from "@/components/DashboardShell";
 import { Button } from "@/components/ui/Button";
 import { ServicesTable } from "@/components/ServicesTable";
 
@@ -16,14 +12,10 @@ type ServiceRow = {
 };
 
 export default async function AdminServicesPage() {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/auth/login");
-
   const services = await prisma.service.findMany({ orderBy: { createdAt: "desc" } });
 
   return (
-    <DashboardShell role="ADMIN" userName={session.user.name}>
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
@@ -39,6 +31,6 @@ export default async function AdminServicesPage() {
 
         <ServicesTable services={services as ServiceRow[]} />
       </div>
-    </DashboardShell>
+    </>
   );
 }
