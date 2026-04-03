@@ -22,6 +22,13 @@
 // },
 
 const nextConfig = {
+  async redirects() {
+    return [
+      { source: '/parents', destination: '/for-parents', permanent: true },
+      { source: '/education', destination: '/education-hub', permanent: true },
+      { source: '/spiritual', destination: '/spiritual-food', permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       {

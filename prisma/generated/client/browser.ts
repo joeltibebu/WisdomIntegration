@@ -63,6 +63,11 @@ export type Service = Prisma.ServiceModel
  */
 export type ContentPost = Prisma.ContentPostModel
 /**
+ * Model Video
+ * 
+ */
+export type Video = Prisma.VideoModel
+/**
  * Model Book
  * 
  */

@@ -60,6 +60,7 @@ export const ModelName = {
   Message: 'Message',
   Service: 'Service',
   ContentPost: 'ContentPost',
+  Video: 'Video',
   Book: 'Book',
   GalleryImage: 'GalleryImage',
   HeroSection: 'HeroSection',
@@ -195,6 +196,10 @@ export const ContentPostScalarFieldEnum = {
   title: 'title',
   slug: 'slug',
   body: 'body',
+  excerpt: 'excerpt',
+  featured_image: 'featured_image',
+  content_type: 'content_type',
+  category: 'category',
   imageUrl: 'imageUrl',
   published: 'published',
   publishedAt: 'publishedAt',
@@ -203,6 +208,24 @@ export const ContentPostScalarFieldEnum = {
 } as const
 
 export type ContentPostScalarFieldEnum = (typeof ContentPostScalarFieldEnum)[keyof typeof ContentPostScalarFieldEnum]
+
+
+export const VideoScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  thumbnail_url: 'thumbnail_url',
+  video_url: 'video_url',
+  category: 'category',
+  is_featured: 'is_featured',
+  is_published: 'is_published',
+  published_at: 'published_at',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
 export const BookScalarFieldEnum = {

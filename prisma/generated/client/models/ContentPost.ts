@@ -29,6 +29,10 @@ export type ContentPostMinAggregateOutputType = {
   title: string | null
   slug: string | null
   body: string | null
+  excerpt: string | null
+  featured_image: string | null
+  content_type: string | null
+  category: string | null
   imageUrl: string | null
   published: boolean | null
   publishedAt: Date | null
@@ -41,6 +45,10 @@ export type ContentPostMaxAggregateOutputType = {
   title: string | null
   slug: string | null
   body: string | null
+  excerpt: string | null
+  featured_image: string | null
+  content_type: string | null
+  category: string | null
   imageUrl: string | null
   published: boolean | null
   publishedAt: Date | null
@@ -53,6 +61,10 @@ export type ContentPostCountAggregateOutputType = {
   title: number
   slug: number
   body: number
+  excerpt: number
+  featured_image: number
+  content_type: number
+  category: number
   imageUrl: number
   published: number
   publishedAt: number
@@ -67,6 +79,10 @@ export type ContentPostMinAggregateInputType = {
   title?: true
   slug?: true
   body?: true
+  excerpt?: true
+  featured_image?: true
+  content_type?: true
+  category?: true
   imageUrl?: true
   published?: true
   publishedAt?: true
@@ -79,6 +95,10 @@ export type ContentPostMaxAggregateInputType = {
   title?: true
   slug?: true
   body?: true
+  excerpt?: true
+  featured_image?: true
+  content_type?: true
+  category?: true
   imageUrl?: true
   published?: true
   publishedAt?: true
@@ -91,6 +111,10 @@ export type ContentPostCountAggregateInputType = {
   title?: true
   slug?: true
   body?: true
+  excerpt?: true
+  featured_image?: true
+  content_type?: true
+  category?: true
   imageUrl?: true
   published?: true
   publishedAt?: true
@@ -176,6 +200,10 @@ export type ContentPostGroupByOutputType = {
   title: string
   slug: string
   body: string
+  excerpt: string | null
+  featured_image: string | null
+  content_type: string
+  category: string | null
   imageUrl: string | null
   published: boolean
   publishedAt: Date | null
@@ -209,6 +237,10 @@ export type ContentPostWhereInput = {
   title?: Prisma.StringFilter<"ContentPost"> | string
   slug?: Prisma.StringFilter<"ContentPost"> | string
   body?: Prisma.StringFilter<"ContentPost"> | string
+  excerpt?: Prisma.StringNullableFilter<"ContentPost"> | string | null
+  featured_image?: Prisma.StringNullableFilter<"ContentPost"> | string | null
+  content_type?: Prisma.StringFilter<"ContentPost"> | string
+  category?: Prisma.StringNullableFilter<"ContentPost"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"ContentPost"> | string | null
   published?: Prisma.BoolFilter<"ContentPost"> | boolean
   publishedAt?: Prisma.DateTimeNullableFilter<"ContentPost"> | Date | string | null
@@ -221,6 +253,10 @@ export type ContentPostOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  excerpt?: Prisma.SortOrderInput | Prisma.SortOrder
+  featured_image?: Prisma.SortOrderInput | Prisma.SortOrder
+  content_type?: Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -236,6 +272,10 @@ export type ContentPostWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ContentPostWhereInput | Prisma.ContentPostWhereInput[]
   title?: Prisma.StringFilter<"ContentPost"> | string
   body?: Prisma.StringFilter<"ContentPost"> | string
+  excerpt?: Prisma.StringNullableFilter<"ContentPost"> | string | null
+  featured_image?: Prisma.StringNullableFilter<"ContentPost"> | string | null
+  content_type?: Prisma.StringFilter<"ContentPost"> | string
+  category?: Prisma.StringNullableFilter<"ContentPost"> | string | null
   imageUrl?: Prisma.StringNullableFilter<"ContentPost"> | string | null
   published?: Prisma.BoolFilter<"ContentPost"> | boolean
   publishedAt?: Prisma.DateTimeNullableFilter<"ContentPost"> | Date | string | null
@@ -248,6 +288,10 @@ export type ContentPostOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  excerpt?: Prisma.SortOrderInput | Prisma.SortOrder
+  featured_image?: Prisma.SortOrderInput | Prisma.SortOrder
+  content_type?: Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -266,6 +310,10 @@ export type ContentPostScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"ContentPost"> | string
   slug?: Prisma.StringWithAggregatesFilter<"ContentPost"> | string
   body?: Prisma.StringWithAggregatesFilter<"ContentPost"> | string
+  excerpt?: Prisma.StringNullableWithAggregatesFilter<"ContentPost"> | string | null
+  featured_image?: Prisma.StringNullableWithAggregatesFilter<"ContentPost"> | string | null
+  content_type?: Prisma.StringWithAggregatesFilter<"ContentPost"> | string
+  category?: Prisma.StringNullableWithAggregatesFilter<"ContentPost"> | string | null
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"ContentPost"> | string | null
   published?: Prisma.BoolWithAggregatesFilter<"ContentPost"> | boolean
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ContentPost"> | Date | string | null
@@ -278,6 +326,10 @@ export type ContentPostCreateInput = {
   title: string
   slug: string
   body: string
+  excerpt?: string | null
+  featured_image?: string | null
+  content_type?: string
+  category?: string | null
   imageUrl?: string | null
   published?: boolean
   publishedAt?: Date | string | null
@@ -290,6 +342,10 @@ export type ContentPostUncheckedCreateInput = {
   title: string
   slug: string
   body: string
+  excerpt?: string | null
+  featured_image?: string | null
+  content_type?: string
+  category?: string | null
   imageUrl?: string | null
   published?: boolean
   publishedAt?: Date | string | null
@@ -302,6 +358,10 @@ export type ContentPostUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featured_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content_type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -314,6 +374,10 @@ export type ContentPostUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featured_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content_type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -326,6 +390,10 @@ export type ContentPostCreateManyInput = {
   title: string
   slug: string
   body: string
+  excerpt?: string | null
+  featured_image?: string | null
+  content_type?: string
+  category?: string | null
   imageUrl?: string | null
   published?: boolean
   publishedAt?: Date | string | null
@@ -338,6 +406,10 @@ export type ContentPostUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featured_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content_type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -350,6 +422,10 @@ export type ContentPostUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
+  excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featured_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content_type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -362,6 +438,10 @@ export type ContentPostCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  excerpt?: Prisma.SortOrder
+  featured_image?: Prisma.SortOrder
+  content_type?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   published?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
@@ -374,6 +454,10 @@ export type ContentPostMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  excerpt?: Prisma.SortOrder
+  featured_image?: Prisma.SortOrder
+  content_type?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   published?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
@@ -386,6 +470,10 @@ export type ContentPostMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  excerpt?: Prisma.SortOrder
+  featured_image?: Prisma.SortOrder
+  content_type?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   published?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
@@ -400,6 +488,10 @@ export type ContentPostSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   title?: boolean
   slug?: boolean
   body?: boolean
+  excerpt?: boolean
+  featured_image?: boolean
+  content_type?: boolean
+  category?: boolean
   imageUrl?: boolean
   published?: boolean
   publishedAt?: boolean
@@ -412,6 +504,10 @@ export type ContentPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   title?: boolean
   slug?: boolean
   body?: boolean
+  excerpt?: boolean
+  featured_image?: boolean
+  content_type?: boolean
+  category?: boolean
   imageUrl?: boolean
   published?: boolean
   publishedAt?: boolean
@@ -424,6 +520,10 @@ export type ContentPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   title?: boolean
   slug?: boolean
   body?: boolean
+  excerpt?: boolean
+  featured_image?: boolean
+  content_type?: boolean
+  category?: boolean
   imageUrl?: boolean
   published?: boolean
   publishedAt?: boolean
@@ -436,6 +536,10 @@ export type ContentPostSelectScalar = {
   title?: boolean
   slug?: boolean
   body?: boolean
+  excerpt?: boolean
+  featured_image?: boolean
+  content_type?: boolean
+  category?: boolean
   imageUrl?: boolean
   published?: boolean
   publishedAt?: boolean
@@ -443,7 +547,7 @@ export type ContentPostSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ContentPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "body" | "imageUrl" | "published" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["contentPost"]>
+export type ContentPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "body" | "excerpt" | "featured_image" | "content_type" | "category" | "imageUrl" | "published" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["contentPost"]>
 
 export type $ContentPostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ContentPost"
@@ -453,6 +557,10 @@ export type $ContentPostPayload<ExtArgs extends runtime.Types.Extensions.Interna
     title: string
     slug: string
     body: string
+    excerpt: string | null
+    featured_image: string | null
+    content_type: string
+    category: string | null
     imageUrl: string | null
     published: boolean
     publishedAt: Date | null
@@ -885,6 +993,10 @@ export interface ContentPostFieldRefs {
   readonly title: Prisma.FieldRef<"ContentPost", 'String'>
   readonly slug: Prisma.FieldRef<"ContentPost", 'String'>
   readonly body: Prisma.FieldRef<"ContentPost", 'String'>
+  readonly excerpt: Prisma.FieldRef<"ContentPost", 'String'>
+  readonly featured_image: Prisma.FieldRef<"ContentPost", 'String'>
+  readonly content_type: Prisma.FieldRef<"ContentPost", 'String'>
+  readonly category: Prisma.FieldRef<"ContentPost", 'String'>
   readonly imageUrl: Prisma.FieldRef<"ContentPost", 'String'>
   readonly published: Prisma.FieldRef<"ContentPost", 'Boolean'>
   readonly publishedAt: Prisma.FieldRef<"ContentPost", 'DateTime'>

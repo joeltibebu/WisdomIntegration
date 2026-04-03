@@ -393,6 +393,7 @@ export const ModelName = {
   Message: 'Message',
   Service: 'Service',
   ContentPost: 'ContentPost',
+  Video: 'Video',
   Book: 'Book',
   GalleryImage: 'GalleryImage',
   HeroSection: 'HeroSection',
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "childProfile" | "session" | "sessionNote" | "progressReport" | "goal" | "message" | "service" | "contentPost" | "book" | "galleryImage" | "heroSection" | "homepageFeature" | "pageBlock" | "event" | "testimonial" | "siteSetting"
+    modelProps: "user" | "childProfile" | "session" | "sessionNote" | "progressReport" | "goal" | "message" | "service" | "contentPost" | "video" | "book" | "galleryImage" | "heroSection" | "homepageFeature" | "pageBlock" | "event" | "testimonial" | "siteSetting"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1083,6 +1084,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ContentPostCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ContentPostCountAggregateOutputType> | number
+        }
+      }
+    }
+    Video: {
+      payload: Prisma.$VideoPayload<ExtArgs>
+      fields: Prisma.VideoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VideoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VideoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
+        }
+        findFirst: {
+          args: Prisma.VideoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VideoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
+        }
+        findMany: {
+          args: Prisma.VideoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>[]
+        }
+        create: {
+          args: Prisma.VideoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
+        }
+        createMany: {
+          args: Prisma.VideoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VideoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>[]
+        }
+        delete: {
+          args: Prisma.VideoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
+        }
+        update: {
+          args: Prisma.VideoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
+        }
+        deleteMany: {
+          args: Prisma.VideoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VideoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VideoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>[]
+        }
+        upsert: {
+          args: Prisma.VideoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
+        }
+        aggregate: {
+          args: Prisma.VideoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVideo>
+        }
+        groupBy: {
+          args: Prisma.VideoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VideoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VideoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VideoCountAggregateOutputType> | number
         }
       }
     }
@@ -1826,6 +1901,10 @@ export const ContentPostScalarFieldEnum = {
   title: 'title',
   slug: 'slug',
   body: 'body',
+  excerpt: 'excerpt',
+  featured_image: 'featured_image',
+  content_type: 'content_type',
+  category: 'category',
   imageUrl: 'imageUrl',
   published: 'published',
   publishedAt: 'publishedAt',
@@ -1834,6 +1913,24 @@ export const ContentPostScalarFieldEnum = {
 } as const
 
 export type ContentPostScalarFieldEnum = (typeof ContentPostScalarFieldEnum)[keyof typeof ContentPostScalarFieldEnum]
+
+
+export const VideoScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  thumbnail_url: 'thumbnail_url',
+  video_url: 'video_url',
+  category: 'category',
+  is_featured: 'is_featured',
+  is_published: 'is_published',
+  published_at: 'published_at',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
 export const BookScalarFieldEnum = {
@@ -2216,6 +2313,7 @@ export type GlobalOmitConfig = {
   message?: Prisma.MessageOmit
   service?: Prisma.ServiceOmit
   contentPost?: Prisma.ContentPostOmit
+  video?: Prisma.VideoOmit
   book?: Prisma.BookOmit
   galleryImage?: Prisma.GalleryImageOmit
   heroSection?: Prisma.HeroSectionOmit

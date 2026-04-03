@@ -14,9 +14,9 @@ const navLinks = [
     label: "Focused Support", 
     labelAm: "ልዩ ድጋፍ",
     children: [
-      { href: "/parents", label: "For Parents", labelAm: "ለወላጆች" },
-      { href: "/education", label: "Education Hub", labelAm: "የትምህርት ማዕከል" },
-      { href: "/spiritual", label: "Spiritual Food", labelAm: "መንፈሳዊ ምግብ" },
+      { href: "/for-parents", label: "For Parents", labelAm: "ለወላጆች" },
+      { href: "/education-hub", label: "Education Hub", labelAm: "የትምህርት ማዕከል" },
+      { href: "/spiritual-food", label: "Spiritual Food", labelAm: "መንፈሳዊ ምግብ" },
     ]
   },
   {
