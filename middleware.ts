@@ -23,4 +23,4 @@ export default withAuth(
   { callbacks: { authorized: ({ token }) => !!token } }
 )
 
-export const config = { matcher: ['/dashboard/:path*', '/admin/:path*'] }
+export const config = { matcher: ['/dashboard/:path*', '/admin', '/admin/:path*'] }
