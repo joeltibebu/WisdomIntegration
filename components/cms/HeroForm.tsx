@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface Props {
   page: string;
@@ -93,7 +94,7 @@ export function HeroForm({ page, defaultValues }: Props) {
       </div>
       <FormField id="description" label="Description (English)" fieldType="textarea" required rows={3} value={description} onChange={(e) => setDescription((e.target as HTMLTextAreaElement).value)} error={errors.description} />
       <FormField id="descriptionAm" label="Description (Amharic)" fieldType="textarea" rows={3} value={descriptionAm} onChange={(e) => setDescriptionAm((e.target as HTMLTextAreaElement).value)} error={errors.descriptionAm} />
-      <FormField id="backgroundImage" label="Background Image URL (optional)" value={backgroundImage} onChange={(e) => setBackgroundImage((e.target as HTMLInputElement).value)} placeholder="/images/hero-bg.jpg" />
+      <ImageUploadField id="backgroundImage" label="Background Image (optional)" value={backgroundImage} onChange={setBackgroundImage} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <FormField id="ctaText" label="CTA Button Text (optional)" value={ctaText} onChange={(e) => setCtaText((e.target as HTMLInputElement).value)} placeholder="Donate Now" />
         <FormField id="ctaLink" label="CTA Button Link (optional)" value={ctaLink} onChange={(e) => setCtaLink((e.target as HTMLInputElement).value)} placeholder="/donate" />

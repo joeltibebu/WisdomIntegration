@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface Props {
   id?: string;
@@ -92,7 +93,7 @@ export function EventForm({ id, defaultValues }: Props) {
         <FormField id="location" label="Location (English)" required value={location} onChange={(e) => setLocation((e.target as HTMLInputElement).value)} error={errors.location} />
         <FormField id="locationAm" label="Location (Amharic)" required value={locationAm} onChange={(e) => setLocationAm((e.target as HTMLInputElement).value)} error={errors.locationAm} />
       </div>
-      <FormField id="imageUrl" label="Image URL (optional)" value={imageUrl} onChange={(e) => setImageUrl((e.target as HTMLInputElement).value)} placeholder="/images/event.jpg" />
+      <ImageUploadField id="imageUrl" label="Image (optional)" value={imageUrl} onChange={setImageUrl} />
 
       <div className="flex items-center gap-3">
         <input id="active" type="checkbox" checked={active} onChange={(e) => setActive(e.target.checked)} className="h-4 w-4 rounded border-wisdom-border text-wisdom-blue focus:ring-wisdom-blue" />

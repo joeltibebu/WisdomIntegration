@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface Program {
   id: string;
@@ -208,11 +209,11 @@ export function ProgramManager() {
                 className="font-amharic"
               />
             </div>
-            <FormField
+            <ImageUploadField
               id="imageUrl"
-              label="Image URL"
+              label="Image (optional)"
               value={editing.imageUrl || ""}
-              onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })}
+              onChange={(url) => setEditing({ ...editing, imageUrl: url })}
             />
             <FormField
               id="order"

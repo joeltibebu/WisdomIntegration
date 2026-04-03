@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface Props {
   id?: string;
@@ -86,7 +87,7 @@ export function BookForm({ id, defaultValues }: Props) {
       <FormField id="author" label="Author" required value={author} onChange={(e) => setAuthor((e.target as HTMLInputElement).value)} error={errors.author} />
       <FormField id="description" label="Description (English)" fieldType="textarea" required rows={3} value={description} onChange={(e) => setDescription((e.target as HTMLTextAreaElement).value)} error={errors.description} />
       <FormField id="descriptionAm" label="Description (Amharic)" fieldType="textarea" rows={3} value={descriptionAm} onChange={(e) => setDescriptionAm((e.target as HTMLTextAreaElement).value)} error={errors.descriptionAm} />
-      <FormField id="coverImageUrl" label="Cover Image URL" required value={coverImageUrl} onChange={(e) => setCoverImageUrl((e.target as HTMLInputElement).value)} error={errors.coverImageUrl} placeholder="/images/book-cover.jpg" />
+      <ImageUploadField id="coverImageUrl" label="Cover Image" required value={coverImageUrl} onChange={setCoverImageUrl} error={errors.coverImageUrl} />
       <FormField id="purchaseLink" label="Purchase Link (optional)" value={purchaseLink} onChange={(e) => setPurchaseLink((e.target as HTMLInputElement).value)} placeholder="https://..." />
 
       <div className="flex items-center gap-3">

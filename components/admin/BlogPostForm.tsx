@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface BlogPostFormProps {
   postId?: string;
@@ -196,23 +197,13 @@ export function BlogPostForm({ postId, defaultValues, onSuccess }: BlogPostFormP
         placeholder="Write your post content here..."
       />
 
-      <FormField
+      <ImageUploadField
         id="featured_image"
-        label="Featured Image URL"
+        label="Featured Image"
         value={featuredImage}
-        onChange={(e) => setFeaturedImage((e.target as HTMLInputElement).value)}
+        onChange={setFeaturedImage}
         error={errors.featured_image}
-        placeholder="/images/cover.jpg or https://..."
       />
-
-      {featuredImage && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={featuredImage}
-          alt="Featured image preview"
-          className="w-full max-h-48 object-cover rounded-xl border border-wisdom-border"
-        />
-      )}
 
       <FormField
         id="content_type"

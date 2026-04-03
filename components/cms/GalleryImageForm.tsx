@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface Props {
   id?: string;
@@ -71,7 +72,7 @@ export function GalleryImageForm({ id, defaultValues }: Props) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5 max-w-2xl">
-      <FormField id="imageUrl" label="Image URL" required value={imageUrl} onChange={(e) => setImageUrl((e.target as HTMLInputElement).value)} error={errors.imageUrl} placeholder="/images/gallery/photo.jpg" />
+      <ImageUploadField id="imageUrl" label="Image" required value={imageUrl} onChange={setImageUrl} error={errors.imageUrl} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <FormField id="title" label="Caption (English)" value={title} onChange={(e) => setTitle((e.target as HTMLInputElement).value)} />
         <FormField id="titleAm" label="Caption (Amharic)" value={titleAm} onChange={(e) => setTitleAm((e.target as HTMLInputElement).value)} />

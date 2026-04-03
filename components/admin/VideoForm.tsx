@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface VideoFormProps {
   videoId?: string;
@@ -133,7 +134,7 @@ export function VideoForm({ videoId, defaultValues, onSuccess }: VideoFormProps)
       <FormField id="title" label="Title" required value={title} onChange={handleTitleChange} error={errors.title} placeholder="Video title" />
       <FormField id="slug" label="Slug" required value={slug} onChange={handleSlugChange} error={errors.slug} placeholder="video-slug" />
       <FormField id="description" label="Description" fieldType="textarea" required rows={4} value={description} onChange={(e) => setDescription((e.target as HTMLTextAreaElement).value)} error={errors.description} placeholder="Brief description of the video" />
-      <FormField id="thumbnail_url" label="Thumbnail URL" value={thumbnailUrl} onChange={(e) => setThumbnailUrl((e.target as HTMLInputElement).value)} error={errors.thumbnail_url} placeholder="/images/thumb.jpg or https://..." />
+      <ImageUploadField id="thumbnail_url" label="Thumbnail (optional)" value={thumbnailUrl} onChange={setThumbnailUrl} error={errors.thumbnail_url} />
       <FormField id="video_url" label="Video URL" required value={videoUrl} onChange={(e) => setVideoUrl((e.target as HTMLInputElement).value)} error={errors.video_url} placeholder="https://youtube.com/watch?v=..." />
       <FormField id="category" label="Category" fieldType="select" required value={category} onChange={(e) => setCategory((e.target as HTMLSelectElement).value)} error={errors.category}>
         <option value="">— Select a category —</option>

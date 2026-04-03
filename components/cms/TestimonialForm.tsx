@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
+import { ImageUploadField } from "@/components/ui/ImageUploadField";
 
 interface Props {
   id?: string;
@@ -79,7 +80,7 @@ export function TestimonialForm({ id, defaultValues }: Props) {
       <FormField id="role" label="Role / Relationship" value={role} onChange={(e) => setRole((e.target as HTMLInputElement).value)} placeholder="e.g. Parents of a child with Autism" />
       <FormField id="content" label="Quote (English)" fieldType="textarea" required rows={4} value={content} onChange={(e) => setContent((e.target as HTMLTextAreaElement).value)} error={errors.content} placeholder="Their testimonial..." />
       <FormField id="contentAm" label="Quote (Amharic)" fieldType="textarea" rows={4} value={contentAm} onChange={(e) => setContentAm((e.target as HTMLTextAreaElement).value)} placeholder="የምስክርነት ቃላቸው..." />
-      <FormField id="imageUrl" label="Photo URL" value={imageUrl} onChange={(e) => setImageUrl((e.target as HTMLInputElement).value)} placeholder="/images/person.jpg" />
+      <ImageUploadField id="imageUrl" label="Photo (optional)" value={imageUrl} onChange={setImageUrl} />
       <FormField id="order" label="Display Order" type="number" value={order} onChange={(e) => setOrder((e.target as HTMLInputElement).value)} />
 
       <div className="flex items-center gap-3">
