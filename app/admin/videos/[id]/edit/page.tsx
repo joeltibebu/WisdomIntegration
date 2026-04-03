@@ -1,22 +1,13 @@
 import { notFound } from "next/navigation";
 import { VideoForm } from "@/components/admin/VideoForm";
+import { prisma } from "@/lib/prisma";
 
 interface EditVideoPageProps {
   params: { id: string };
 }
 
 export default async function EditVideoPage({ params }: EditVideoPageProps) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/admin/videos/${params.id}`,
-    { cache: "no-store" }
-  );
-
-  if (!res.ok) {
-    notFound();
-  }
-
-  const json = await res.json();
-  const video = json.data;
+  const video = await prisma.video.findUnique({ where: { id: params.id } });
 
   if (!video) {
     notFound();
