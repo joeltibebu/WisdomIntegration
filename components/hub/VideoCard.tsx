@@ -14,7 +14,7 @@ export function VideoCard({
   description,
   thumbnail_url,
   video_url,
-  category,
+  category: _category,
   is_featured,
 }: VideoCardProps) {
   return (

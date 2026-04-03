@@ -29,7 +29,7 @@ export function ContentCard({
   featured_image,
   content_type,
   published_at,
-  slug,
+  slug: _slug,
 }: ContentCardProps) {
   const isDevotional = content_type === "devotional";
 
