@@ -90,7 +90,7 @@ export function RichTextEditor({
   // Sync external value changes (e.g. when form resets)
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || "", false);
+      editor.commands.setContent(value || "", { emitUpdate: false });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
