@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface ContentCardProps {
   title: string;
@@ -29,13 +30,15 @@ export function ContentCard({
   featured_image,
   content_type,
   published_at,
+  slug,
 }: ContentCardProps) {
   const isDevotional = content_type === "devotional";
 
   return (
-    <div
+    <Link
+      href={`/blog/${slug}`}
       data-testid="content-card"
-      className="group relative bg-white dark:bg-white/5 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+      className="group relative bg-white dark:bg-white/5 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 block"
     >
       {isDevotional && (
         <div
@@ -81,6 +84,6 @@ export function ContentCard({
           </p>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
