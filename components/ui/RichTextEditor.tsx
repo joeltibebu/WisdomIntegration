@@ -69,7 +69,6 @@ export function RichTextEditor({
   label,
   value,
   onChange,
-  placeholder = "Write here…",
   error,
   required,
   minHeight = "200px",
