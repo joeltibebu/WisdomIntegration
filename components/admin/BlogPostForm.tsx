@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
 import { ImageUploadField } from "@/components/ui/ImageUploadField";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 
 interface BlogPostFormProps {
   postId?: string;
@@ -174,27 +175,25 @@ export function BlogPostForm({ postId, defaultValues, onSuccess }: BlogPostFormP
         placeholder="post-slug"
       />
 
-      <FormField
+      <RichTextEditor
         id="excerpt"
         label="Excerpt"
-        fieldType="textarea"
-        rows={3}
         value={excerpt}
-        onChange={(e) => setExcerpt((e.target as HTMLTextAreaElement).value)}
+        onChange={setExcerpt}
         error={errors.excerpt}
         placeholder="Short summary of the post (optional)"
+        minHeight="100px"
       />
 
-      <FormField
+      <RichTextEditor
         id="body"
         label="Body"
-        fieldType="textarea"
         required
-        rows={10}
         value={body}
-        onChange={(e) => setBody((e.target as HTMLTextAreaElement).value)}
+        onChange={setBody}
         error={errors.body}
-        placeholder="Write your post content here..."
+        placeholder="Write your post content here…"
+        minHeight="300px"
       />
 
       <ImageUploadField

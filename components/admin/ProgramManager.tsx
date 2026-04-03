@@ -5,6 +5,7 @@ import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ImageUploadField } from "@/components/ui/ImageUploadField";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 
 interface Program {
   id: string;
@@ -191,13 +192,12 @@ export function ProgramManager() {
               className="font-amharic"
             />
             <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
+              <RichTextEditor
                 id="content"
                 label="Content (English)"
                 value={editing.content || ""}
-                onChange={(e) => setEditing({ ...editing, content: e.target.value })}
-                fieldType="textarea"
-                rows={4}
+                onChange={(html) => setEditing({ ...editing, content: html })}
+                minHeight="150px"
               />
               <FormField
                 id="contentAm"

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
 import { ImageUploadField } from "@/components/ui/ImageUploadField";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 
 interface Props {
   id?: string;
@@ -78,7 +79,7 @@ export function TestimonialForm({ id, defaultValues }: Props) {
     <form onSubmit={handleSubmit} noValidate className="space-y-5 max-w-2xl">
       <FormField id="name" label="Name" required value={name} onChange={(e) => setName((e.target as HTMLInputElement).value)} error={errors.name} placeholder="e.g. Sarah & Daniel M." />
       <FormField id="role" label="Role / Relationship" value={role} onChange={(e) => setRole((e.target as HTMLInputElement).value)} placeholder="e.g. Parents of a child with Autism" />
-      <FormField id="content" label="Quote (English)" fieldType="textarea" required rows={4} value={content} onChange={(e) => setContent((e.target as HTMLTextAreaElement).value)} error={errors.content} placeholder="Their testimonial..." />
+      <RichTextEditor id="content" label="Quote (English)" required value={content} onChange={setContent} error={errors.content} placeholder="Their testimonial…" minHeight="120px" />
       <FormField id="contentAm" label="Quote (Amharic)" fieldType="textarea" rows={4} value={contentAm} onChange={(e) => setContentAm((e.target as HTMLTextAreaElement).value)} placeholder="የምስክርነት ቃላቸው..." />
       <ImageUploadField id="imageUrl" label="Photo (optional)" value={imageUrl} onChange={setImageUrl} />
       <FormField id="order" label="Display Order" type="number" value={order} onChange={(e) => setOrder((e.target as HTMLInputElement).value)} />

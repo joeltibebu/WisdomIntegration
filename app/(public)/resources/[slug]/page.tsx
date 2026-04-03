@@ -70,20 +70,11 @@ export default async function ResourcePostPage({ params }: Props) {
       {/* Body */}
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div
-          className={`prose prose-slate max-w-none ${
+          className={`prose prose-slate max-w-none prose-headings:font-heading prose-a:text-wisdom-blue prose-strong:text-wisdom-text ${
             post.content_type === "devotional" ? "border-l-4 border-wisdom-blue/20 pl-6" : ""
           }`}
-        >
-          {post.body.split("\n").map((para, i) =>
-            para.trim() ? (
-              <p key={i} className="mb-4 text-wisdom-text leading-relaxed">
-                {para}
-              </p>
-            ) : (
-              <br key={i} />
-            )
-          )}
-        </div>
+          dangerouslySetInnerHTML={{ __html: post.body }}
+        />
       </article>
 
       <CTASection />

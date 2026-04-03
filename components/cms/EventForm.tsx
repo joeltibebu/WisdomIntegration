@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
 import { ImageUploadField } from "@/components/ui/ImageUploadField";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 
 interface Props {
   id?: string;
@@ -86,7 +87,7 @@ export function EventForm({ id, defaultValues }: Props) {
         <FormField id="title" label="Title (English)" required value={title} onChange={(e) => setTitle((e.target as HTMLInputElement).value)} error={errors.title} />
         <FormField id="titleAm" label="Title (Amharic)" required value={titleAm} onChange={(e) => setTitleAm((e.target as HTMLInputElement).value)} error={errors.titleAm} />
       </div>
-      <FormField id="description" label="Description (English)" fieldType="textarea" required rows={3} value={description} onChange={(e) => setDescription((e.target as HTMLTextAreaElement).value)} error={errors.description} />
+      <RichTextEditor id="description" label="Description (English)" required value={description} onChange={setDescription} error={errors.description} minHeight="120px" />
       <FormField id="descriptionAm" label="Description (Amharic)" fieldType="textarea" rows={3} value={descriptionAm} onChange={(e) => setDescriptionAm((e.target as HTMLTextAreaElement).value)} error={errors.descriptionAm} />
       <FormField id="date" label="Date & Time" type="datetime-local" required value={date} onChange={(e) => setDate((e.target as HTMLInputElement).value)} error={errors.date} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

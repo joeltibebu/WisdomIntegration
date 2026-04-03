@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
 import { ImageUploadField } from "@/components/ui/ImageUploadField";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 
 interface Props {
   id?: string;
@@ -85,7 +86,7 @@ export function BookForm({ id, defaultValues }: Props) {
         <FormField id="titleAm" label="Title (Amharic)" required value={titleAm} onChange={(e) => setTitleAm((e.target as HTMLInputElement).value)} error={errors.titleAm} />
       </div>
       <FormField id="author" label="Author" required value={author} onChange={(e) => setAuthor((e.target as HTMLInputElement).value)} error={errors.author} />
-      <FormField id="description" label="Description (English)" fieldType="textarea" required rows={3} value={description} onChange={(e) => setDescription((e.target as HTMLTextAreaElement).value)} error={errors.description} />
+      <RichTextEditor id="description" label="Description (English)" required value={description} onChange={setDescription} error={errors.description} minHeight="120px" />
       <FormField id="descriptionAm" label="Description (Amharic)" fieldType="textarea" rows={3} value={descriptionAm} onChange={(e) => setDescriptionAm((e.target as HTMLTextAreaElement).value)} error={errors.descriptionAm} />
       <ImageUploadField id="coverImageUrl" label="Cover Image" required value={coverImageUrl} onChange={setCoverImageUrl} error={errors.coverImageUrl} />
       <FormField id="purchaseLink" label="Purchase Link (optional)" value={purchaseLink} onChange={(e) => setPurchaseLink((e.target as HTMLInputElement).value)} placeholder="https://..." />
