@@ -56,7 +56,7 @@ export function LoginForm({ error, expired }: LoginFormProps) {
       } else if (role === "THERAPIST") {
         window.location.href = "/dashboard/therapist/caseload";
       } else if (role === "ADMIN") {
-        window.location.href = "/dashboard/admin/users";
+        window.location.href = "/admin";
       } else {
         window.location.href = "/";
       }
