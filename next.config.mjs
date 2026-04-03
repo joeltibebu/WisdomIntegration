@@ -39,9 +39,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'plus.unsplash.com',
       },
-    ],
-    localPatterns: [
-      { pathname: '/uploads/**' },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
     ],
   },
 };

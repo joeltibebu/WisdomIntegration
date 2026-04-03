@@ -2,8 +2,7 @@ export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { put } from "@vercel/blob";
 
 async function requireAdmin() {
   const session = await getServerSession(authOptions);
@@ -34,31 +33,31 @@ export async function POST(req: NextRequest) {
   }
 
   if (!ALLOWED_TYPES.includes(file.type)) {
-    return NextResponse.json({ data: null, error: { code: "VALIDATION_ERROR", message: "File type not allowed. Use JPEG, PNG, WebP, GIF, or SVG." } }, { status: 400 });
+    return NextResponse.json(
+      { data: null, error: { code: "VALIDATION_ERROR", message: "File type not allowed. Use JPEG, PNG, WebP, GIF, or SVG." } },
+      { status: 400 }
+    );
   }
 
   if (file.size > MAX_SIZE) {
-    return NextResponse.json({ data: null, error: { code: "VALIDATION_ERROR", message: "File too large. Maximum size is 5 MB." } }, { status: 400 });
-  }
-
-  const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
-  const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
-
-  try {
-    await mkdir(uploadDir, { recursive: true });
-  } catch (err) {
-    console.error("[POST /api/admin/upload] mkdir failed:", err);
-    return NextResponse.json({ data: null, error: { code: "INTERNAL_ERROR", message: `mkdir failed: ${String(err)}` } }, { status: 500 });
+    return NextResponse.json(
+      { data: null, error: { code: "VALIDATION_ERROR", message: "File too large. Maximum size is 5 MB." } },
+      { status: 400 }
+    );
   }
 
   try {
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await writeFile(path.join(uploadDir, safeName), buffer);
-  } catch (err) {
-    console.error("[POST /api/admin/upload] writeFile failed:", err);
-    return NextResponse.json({ data: null, error: { code: "INTERNAL_ERROR", message: `writeFile failed: ${String(err)}` } }, { status: 500 });
-  }
+    const blob = await put(`uploads/${Date.now()}-${file.name}`, file, {
+      access: "public",
+      contentType: file.type,
+    });
 
-  return NextResponse.json({ data: { url: `/uploads/${safeName}` }, error: null }, { status: 201 });
+    return NextResponse.json({ data: { url: blob.url }, error: null }, { status: 201 });
+  } catch (err) {
+    console.error("[POST /api/admin/upload]", err);
+    return NextResponse.json(
+      { data: null, error: { code: "INTERNAL_ERROR", message: "Failed to upload file." } },
+      { status: 500 }
+    );
+  }
 }
