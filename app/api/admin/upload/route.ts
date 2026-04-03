@@ -47,11 +47,17 @@ export async function POST(req: NextRequest) {
 
   try {
     await mkdir(uploadDir, { recursive: true });
+  } catch (err) {
+    console.error("[POST /api/admin/upload] mkdir failed:", err);
+    return NextResponse.json({ data: null, error: { code: "INTERNAL_ERROR", message: `mkdir failed: ${String(err)}` } }, { status: 500 });
+  }
+
+  try {
     const buffer = Buffer.from(await file.arrayBuffer());
     await writeFile(path.join(uploadDir, safeName), buffer);
   } catch (err) {
-    console.error("[POST /api/admin/upload]", err);
-    return NextResponse.json({ data: null, error: { code: "INTERNAL_ERROR", message: "Failed to save file." } }, { status: 500 });
+    console.error("[POST /api/admin/upload] writeFile failed:", err);
+    return NextResponse.json({ data: null, error: { code: "INTERNAL_ERROR", message: `writeFile failed: ${String(err)}` } }, { status: 500 });
   }
 
   return NextResponse.json({ data: { url: `/uploads/${safeName}` }, error: null }, { status: 201 });
